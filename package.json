@@ -42,9 +42,15 @@
   },
   "lint-staged": {
     "*.{js,jsx,tsx,ts}": [
-      "npm run lint",
-      "npm run lint:prettier",
-      "npm run lint:style"
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{cjs,json}": [
+      "prettier --write"
+    ],
+    "*.{css}": [
+      "stylelint --fix",
+      "prettier --write"
     ]
   }
 }
