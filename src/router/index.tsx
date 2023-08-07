@@ -27,5 +27,5 @@ const routes: RouteObject[] = [
 ]
 
 export default createBrowserRouter(routes, {
-  basename: '/'
+  basename: import.meta.env.VITE_BASE_URL
 })
