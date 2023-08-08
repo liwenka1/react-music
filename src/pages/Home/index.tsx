@@ -7,9 +7,9 @@ const Home = () => {
   const increase = useCounterStore((state) => state.increase)
 
   return (
-    <div className="bg-pink-900 h-96">
+    <div>
       这里是Home
-      <span className="text-lg">123</span>
+      <span>123</span>
       <Link to="/about">去about</Link>
       <Switch />
       <button onClick={() => increase(1)}> counter: {counter} </button>

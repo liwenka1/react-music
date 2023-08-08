@@ -58,3 +58,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+.sidebar {
+  @apply hidden fixed w-60 h-full lg:flex flex-col mt-12 pb-16 pr-4 pt-2;
+}
+
+.tags-container {
+  @apply relative top-14 flex flex-auto items-center space-x-3 px-5 py-2.5 border-t border-b bg-opacity-95 z-20 overflow-y-hidden;
+}
+
+.videos-container {
+  @apply grid grid-cols-1 gap-y-6 p-2 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-6 sm:p-4 md:grid-cols-3 md:gap-x-2 md:gap-y-6 md:p-4 lg:grid-cols-3 lg:gap-x-2 lg:gap-y-6 lg:p-4 xl:grid-cols-4 xl:gap-x-4 xl:gap-y-10 xl:p-6 h-full mt-14 sm:mt-12;
+}
