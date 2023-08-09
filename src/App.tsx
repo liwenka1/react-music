@@ -2,6 +2,7 @@ import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import Nav from './components/Nav'
 import Sidebar from './components/Sidebar'
+import Tags from './components/Tags'
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
         <Sidebar />
         <div className="flex flex-col lg:ml-60 w-full lg:w-4/5 xl:w-5/6">
           <div className="tags-container">
-            <RouterProvider router={router} />
+            <Tags />
           </div>
           <div className="videos-container">
             <RouterProvider router={router} />
