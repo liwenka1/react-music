@@ -1,15 +1,12 @@
 const Tags = () => {
   return (
-    <div>
-      <a href="#" className="text-sm  py-1.5 px-3 rounded-full">
+    <div className="inline-block align-middle my-2">
+      <span className="text-sm  py-1.5 px-3 rounded-full cursor-pointer">
         All
-      </a>
-      <a
-        href="#"
-        className="text-sm bg-pillsBg hover:bg-gray-700 py-1 px-3 rounded-full  border border-gray-700 transition duration-150"
-      >
+      </span>
+      <span className="text-sm bg-pillsBg hover:bg-gray-700 py-1 px-3 rounded-full border border-gray-700 transition duration-150 cursor-pointer">
         CSS
-      </a>
+      </span>
     </div>
   )
 }
