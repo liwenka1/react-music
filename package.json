@@ -62,7 +62,7 @@
     "*.{cjs,json}": [
       "prettier --write"
     ],
-    "*.{css}": [
+    "*.css": [
       "stylelint --fix",
       "prettier --write"
     ]
