@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import SvgIcon from '../SvgIcon'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
+import { ModeToggle } from '../mode-toggle'
 
 const Nav = () => {
   return (
@@ -14,6 +15,7 @@ const Nav = () => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <Switch />
+        <ModeToggle />
       </div>
     </nav>
   )

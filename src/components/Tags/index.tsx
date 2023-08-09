@@ -1,7 +1,7 @@
 const Tags = () => {
   return (
     <div>
-      <a href="#" className="text-sm  py-1.5 px-3 rounded-full text-black">
+      <a href="#" className="text-sm  py-1.5 px-3 rounded-full">
         All
       </a>
       <a
