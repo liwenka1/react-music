@@ -16,7 +16,7 @@ const App = () => {
             <div className="tags-container">
               <Tags />
             </div>
-            <div className="videos-container">
+            <div className="main-container">
               <RouterProvider router={router} />
             </div>
           </div>

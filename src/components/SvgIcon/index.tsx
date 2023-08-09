@@ -1,9 +1,11 @@
 export default function SvgIcon({
+  className,
   name,
   prefix = 'icon',
   color = '#333',
   ...props
 }: {
+  className: string
   name: string
   prefix?: string
   color?: string
@@ -11,7 +13,7 @@ export default function SvgIcon({
   const symbolId = `#${prefix}-${name}`
 
   return (
-    <svg {...props} aria-hidden="true" className="inline-block w-5 h-5">
+    <svg {...props} aria-hidden="true" className={className}>
       <use href={symbolId} fill={color} />
     </svg>
   )

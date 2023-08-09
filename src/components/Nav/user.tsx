@@ -3,8 +3,8 @@ import { ModeToggle } from '../mode-toggle'
 
 const User = () => {
   return (
-    <div className="flex justify-between items-center">
-      <Avatar>
+    <div className="flex items-center space-x-3 sm:space-x-6 pr-4">
+      <Avatar className="w-9 h-9 rounded-full object-cover cursor-pointer">
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
