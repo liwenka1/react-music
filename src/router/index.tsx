@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import lazyLoad from './lazyLoad'
 import Layout from '@/components/Layout'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Toplist = lazy(() => import('@/pages/Toplist'))
@@ -15,6 +16,7 @@ const routes: RouteObject[] = [
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         index: true,
