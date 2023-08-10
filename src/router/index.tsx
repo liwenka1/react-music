@@ -2,13 +2,19 @@ import { lazy } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import lazyLoad from './lazyLoad'
+import Layout from '@/components/Layout'
 
 const Home = lazy(() => import('@/pages/Home'))
+const Toplist = lazy(() => import('@/pages/Toplist'))
+const Playlist = lazy(() => import('@/pages/Playlist'))
+const Artist = lazy(() => import('@/pages/Artist'))
+const Album = lazy(() => import('@/pages/Album'))
 const About = lazy(() => import('@/pages/About'))
 
 const routes: RouteObject[] = [
   {
     path: '/',
+    element: <Layout />,
     children: [
       {
         index: true,
@@ -17,6 +23,22 @@ const routes: RouteObject[] = [
       {
         path: 'home',
         element: lazyLoad(Home)
+      },
+      {
+        path: 'toplist',
+        element: lazyLoad(Toplist)
+      },
+      {
+        path: 'playlist',
+        element: lazyLoad(Playlist)
+      },
+      {
+        path: 'artist',
+        element: lazyLoad(Artist)
+      },
+      {
+        path: 'album',
+        element: lazyLoad(Album)
       },
       {
         path: 'about',
