@@ -1,27 +1,41 @@
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useQuery } from 'react-query'
+import { useBanner } from '@/api/banner'
 
-const SlickCarousel = () => {
+const SimpleSlider = () => {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToShow: 4,
+    slidesToScroll: 4
+  }
+  const { isLoading, error, data } = useQuery('useBanner', useBanner)
+  console.log(data)
+
+  if (isLoading || !data) {
+    return <div>Loading...</div>
   }
 
-  const images = [
-    'https://img1.baidu.com/it/u=1170519437,1288564083&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1691859600&t=b24fa3938f2a02107ab5df1e5734c50d',
-    'https://img1.baidu.com/it/u=1170519437,1288564083&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1691859600&t=b24fa3938f2a02107ab5df1e5734c50d'
-  ]
+  if (error) {
+    return <div>Error occurred</div>
+  }
 
   return (
-    <div className="slick-carousel">
+    <div className="slick-carousel col-span-full">
       <Slider {...settings}>
-        {images.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt={`Slide ${index}`} />
+        {data.map((item) => (
+          <div
+            key={item.bannerId}
+            className="flex justify-center px-2 outline-0"
+          >
+            <img
+              src={item.pic}
+              alt={item.typeTitle}
+              className="w-full h-auto rounded"
+            />
           </div>
         ))}
       </Slider>
@@ -29,4 +43,4 @@ const SlickCarousel = () => {
   )
 }
 
-export default SlickCarousel
+export default SimpleSlider
