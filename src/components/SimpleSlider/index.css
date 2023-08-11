@@ -10,3 +10,7 @@
 .custom-next-arrow {
   @apply -right-6;
 }
+
+.slick-dots li button::before {
+  @apply dark:text-white;
+}
