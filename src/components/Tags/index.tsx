@@ -15,7 +15,7 @@ const Tags = () => {
   }
 
   return (
-    <div className="flex align-middle my-3 overflow-hidden whitespace-nowrap">
+    <div className="flex align-middle overflow-hidden whitespace-nowrap">
       {data.hots.map((item, index) => {
         return (
           <span

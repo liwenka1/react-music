@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const Sidebar = () => {
   const sidebarItems = [
@@ -10,9 +9,8 @@ const Sidebar = () => {
     { title: '新碟上架', link: '/album' },
     { title: '关于', link: '/about' }
   ]
-
-  const [activeIndex, setActiveIndex] = useState(0)
   const navigate = useNavigate()
+  const location = useLocation()
 
   return (
     <div className="sidebar">
@@ -21,17 +19,16 @@ const Sidebar = () => {
           return (
             <div
               className={`flex items-center space-x-5 px-7 py-2.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-500 ${
-                activeIndex == index ? 'bg-gray-200 dark:bg-gray-500' : ''
+                item.link == location.pathname
+                  ? 'bg-gray-200 dark:bg-gray-500'
+                  : ''
               }`}
               key={index}
-              onClick={() => {
-                setActiveIndex(index)
-                navigate(item.link)
-              }}
+              onClick={() => navigate(item.link)}
             >
               <h2
                 className={`text-sm ${
-                  activeIndex == index ? 'font-semibold' : ''
+                  item.link == location.pathname ? 'font-semibold' : ''
                 }`}
               >
                 {item.title}

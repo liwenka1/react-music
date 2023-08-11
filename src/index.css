@@ -64,7 +64,7 @@
 }
 
 .tags-container {
-  @apply relative top-14 flex flex-auto items-center space-x-3 px-5 py-2.5 border-t border-b bg-opacity-95 z-20 overflow-y-hidden;
+  @apply relative top-14 flex flex-auto items-center space-x-3 px-5 py-2.5 border-t border-b bg-opacity-95 z-20;
 }
 
 .main-container {
