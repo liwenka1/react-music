@@ -1,11 +1,7 @@
-import service from '@/utils/request'
-interface SearchHot {
-  first: string
-}
-interface result {
-  hots: SearchHot[]
-}
+import http from '@/utils/request'
+import { searchHot } from './type'
 
 export const useSearchHot = async () => {
-  return await service.get<result>('/search/hot')
+  const { result } = await http.get<{ result: searchHot }>('/search/hot')
+  return result
 }
