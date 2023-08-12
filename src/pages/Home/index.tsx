@@ -6,6 +6,7 @@ const Home = () => {
     <>
       <SimpleSlider />
       <PlayList />
+      <PlayList />
     </>
   )
 }

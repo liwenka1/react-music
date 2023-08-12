@@ -50,17 +50,15 @@ const SimpleSlider = () => {
   }
 
   return (
-    <div className="slick-carousel col-span-full">
+    <div className="slick-carousel sm:col-span-full sm:inline-block hidden">
       <Slider {...settings}>
         {data.map((item) => (
           <div key={item.bannerId} className="flex justify-center outline-0">
-            <div className="mx-2 rounded">
-              <img
-                src={item.pic}
-                alt={item.typeTitle}
-                className="w-full h-auto"
-              />
-            </div>
+            <img
+              src={item.pic}
+              alt={item.typeTitle}
+              className="w-full h-auto rounded scale-95"
+            />
           </div>
         ))}
       </Slider>

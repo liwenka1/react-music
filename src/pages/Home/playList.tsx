@@ -29,7 +29,7 @@ const PlayList = () => {
           <CardTitle>热门推荐</CardTitle>
           <CardDescription>精品歌单</CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-8 gap-4">
+        <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-8">
           {data.playlists.map((item) => {
             return (
               <div className="w-full h-auto cursor-pointer" key={item.id}>
