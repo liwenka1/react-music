@@ -15,7 +15,7 @@ const CustomPrevArrow: FunctionComponent<ArrowProps> = (props) => {
   const { onClick } = props
   return (
     <div className="custom-prev-arrow" onClick={onClick}>
-      <SvgIcon className=" w-6 h-auto" name="chevron-left" />
+      <SvgIcon className="w-6 h-auto" name="chevron-left" />
     </div>
   )
 }
@@ -24,7 +24,7 @@ const CustomNextArrow: FunctionComponent<ArrowProps> = (props) => {
   const { onClick } = props
   return (
     <div className="custom-next-arrow" onClick={onClick}>
-      <SvgIcon className=" w-6 h-auto" name="chevron-right" />
+      <SvgIcon className="w-6 h-auto" name="chevron-right" />
     </div>
   )
 }
@@ -40,7 +40,6 @@ const SimpleSlider = () => {
     nextArrow: <CustomNextArrow />
   }
   const { isLoading, error, data } = useQuery('useBanner', useBanner)
-  console.log(data)
 
   if (isLoading || !data) {
     return <div>Loading...</div>
