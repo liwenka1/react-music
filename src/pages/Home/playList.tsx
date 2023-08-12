@@ -9,11 +9,25 @@ import { useQuery } from 'react-query'
 import { useTopPlaylistHighquality } from '@/api/top'
 import SvgIcon from '@/components/SvgIcon'
 import { convertToTenThousand } from '@/utils/number'
+import { usePlayListTrackAll } from '@/api/playlist'
+import { useSongUrl } from '@/api/song'
 
 const PlayList = () => {
   const { isLoading, error, data } = useQuery('useTopPlaylistHighquality', () =>
     useTopPlaylistHighquality({ limit: 16, cat: '全部' })
   )
+
+  const getPlayListTrackAll = async (id: number) => {
+    try {
+      const response = await usePlayListTrackAll(id, 12, 10)
+      console.log(response)
+      const songDetail = await useSongUrl(response[0].id)
+      console.log(songDetail)
+      // 处理响应数据
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   if (isLoading || !data) {
     return <div>Loading...</div>
@@ -47,10 +61,12 @@ const PlayList = () => {
                       />
                       <span>{convertToTenThousand(item.playCount)}</span>
                     </div>
-                    <SvgIcon
-                      className="w-6 h-full inline-block pr-1 hover:scale-110 hover:text-white cursor-pointer"
-                      name="play-circle"
-                    />
+                    <div onClick={() => getPlayListTrackAll(item.id)}>
+                      <SvgIcon
+                        className="w-6 h-full inline-block pr-1 hover:scale-110 hover:text-white cursor-pointer"
+                        name="play-circle"
+                      />
+                    </div>
                   </div>
                 </div>
                 <p
