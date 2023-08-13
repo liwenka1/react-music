@@ -1,6 +1,5 @@
 import SimpleSlider from '@/components/SimpleSlider'
 import PlayList from './playList'
-import Aplayer from '@/components/Aplayer'
 
 const Home = () => {
   return (
@@ -8,7 +7,6 @@ const Home = () => {
       <SimpleSlider />
       <PlayList />
       <PlayList />
-      <Aplayer />
     </>
   )
 }

@@ -1,43 +1,44 @@
 import 'APlayer/dist/APlayer.min.css'
 import APlayer from 'APlayer'
-import { useEffect } from 'react'
-
-interface MusicMsg {
-  id: number
-  url: string
-  name: string
-  artist: string
-  cover: string
-}
+import { useEffect, useRef } from 'react'
+import useAplayerStore from '@/stores/aplayer'
 
 const Aplayer = () => {
+  const ap = useRef<APlayer | null>(null)
+  const { audio } = useAplayerStore()
+
   useEffect(() => {
-    const createDom = (musicMsg: MusicMsg) => {
-      const ap = new APlayer({
-        container: document.querySelector('.playMusic'),
-        fixed: true,
-        audio: [
-          {
-            ...musicMsg,
-            fixed: true
-          }
-        ]
-      })
-      console.log(ap)
+    // if (ap.current) {
+    //   // 如果 APlayer 实例已存在，则更新 audio 数据
+    //   ap.current.list.clear()
+    //   ap.current.list.add(audio)
+    //   return
+    // }
+
+    ap.current = new APlayer({
+      container: document.querySelector('.playMusic') as HTMLDivElement,
+      mini: false,
+      autoplay: false,
+      theme: '#FADFA3',
+      loop: 'all',
+      order: 'random',
+      preload: 'auto',
+      volume: 0.7,
+      mutex: true,
+      listFolded: false,
+      listMaxHeight: 90,
+      lrcType: 3,
+      audio: [...audio]
+    })
+
+    return () => {
+      ap.current?.destroy()
     }
+  }, [audio])
 
-    const musicMsg = {
-      id: 0,
-      url: 'http://m802.music.126.net/20230812233708/0b267a585b0b57880e0410c004c9bf30/jd-musicrep-ts/b3a8/a678/decc/bd9104db09f69153a5da31e88e919344.mp3',
-      name: '你给我听好',
-      artist: '陈奕迅',
-      cover: ''
-    }
-
-    createDom(musicMsg)
-  }, [])
-
-  return <div className="playMusic"></div>
+  return (
+    <div className="playMusic w-full fixed bottom-0 z-20 bg-background p-0 m-0"></div>
+  )
 }
 
 export default Aplayer

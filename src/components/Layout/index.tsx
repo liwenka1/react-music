@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Nav from '@/components/Nav'
 import Sidebar from '@/components/Sidebar'
 import Tags from '@/components/Tags'
+import Aplayer from '@/components/Aplayer'
 
 const Layout = () => {
   return (
@@ -18,6 +19,7 @@ const Layout = () => {
           </div>
         </div>
       </div>
+      <Aplayer />
     </>
   )
 }
