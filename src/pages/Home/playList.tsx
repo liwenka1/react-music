@@ -9,32 +9,18 @@ import { useQuery } from 'react-query'
 import { useTopPlaylistHighquality } from '@/api/top'
 import SvgIcon from '@/components/SvgIcon'
 import { convertToTenThousand } from '@/utils/number'
-import { usePlayListTrackAll } from '@/api/playlist'
-import { useSongUrl } from '@/api/song'
+import { setPlayList } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
 
 const PlayList = () => {
   const { isLoading, error, data } = useQuery('useTopPlaylistHighquality', () =>
     useTopPlaylistHighquality({ limit: 16, cat: '全部' })
   )
-  const { audio, setAudio } = useAplayerStore()
+  const { setAudio } = useAplayerStore()
 
   const getPlayListTrackAll = async (id: number) => {
-    try {
-      const response = await usePlayListTrackAll(id, 12, 10)
-      const songDetail = await useSongUrl(response[0].id)
-      setAudio({
-        name: response[0].name,
-        artist: response[0].al.name,
-        url: songDetail[0].url,
-        cover: response[0].al.picUrl,
-        lrc: ''
-      })
-      console.log(response, songDetail, audio)
-      // 处理响应数据
-    } catch (error) {
-      console.error(error)
-    }
+    const audioList = await setPlayList(id, 10, 0)
+    setAudio(audioList)
   }
 
   if (isLoading || !data) {
