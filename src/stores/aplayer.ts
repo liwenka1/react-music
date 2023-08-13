@@ -6,7 +6,7 @@ interface AplayerState {
   ap: APlayer | null
   initializeAplayer: () => void
   audio: audio[]
-  setAudio: (audio: audio[] | audio) => void
+  setAudio: (audio: audio) => void
 }
 
 const useAplayerStore = create<AplayerState>((set) => ({
@@ -17,15 +17,16 @@ const useAplayerStore = create<AplayerState>((set) => ({
         container: document.querySelector('.playMusic') as HTMLDivElement,
         mini: false,
         autoplay: false,
+        fixed: false,
         theme: '#FADFA3',
         loop: 'all',
         order: 'random',
         preload: 'auto',
         volume: 0.7,
         mutex: true,
-        listFolded: false,
-        listMaxHeight: 90,
-        lrcType: 3,
+        listFolded: true,
+        listMaxHeight: '150px',
+        lrcType: 1,
         audio: state.audio
       })
 
@@ -38,17 +39,11 @@ const useAplayerStore = create<AplayerState>((set) => ({
   audio: [],
   setAudio: (newAudio) =>
     set((state) => {
-      const updatedAudio = Array.isArray(newAudio)
-        ? newAudio
-        : [...state.audio, newAudio]
-
-      // 更新ap的音频数据
-      state.ap?.list.clear()
-      state.ap?.list.add(updatedAudio)
+      state.ap?.list.add([newAudio])
 
       return {
         ...state,
-        audio: updatedAudio
+        audio: [newAudio]
       }
     })
 }))

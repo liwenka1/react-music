@@ -9,7 +9,7 @@ import { useQuery } from 'react-query'
 import { useTopPlaylistHighquality } from '@/api/top'
 import SvgIcon from '@/components/SvgIcon'
 import { convertToTenThousand } from '@/utils/number'
-import { setPlayList } from '@/utils/aplayer'
+import { setPlayList, setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
 
 const PlayList = () => {
@@ -19,8 +19,11 @@ const PlayList = () => {
   const { setAudio } = useAplayerStore()
 
   const getPlayListTrackAll = async (id: number) => {
-    const audioList = await setPlayList(id, 10, 0)
-    setAudio(audioList)
+    const songList = await setPlayList(id, 10, 0)
+    for (const song of songList) {
+      const audio = await setSong(song)
+      setAudio(audio)
+    }
   }
 
   if (isLoading || !data) {

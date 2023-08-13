@@ -13,7 +13,7 @@ declare module 'APlayer' {
     volume?: number
     mutex?: boolean
     listFolded?: boolean
-    listMaxHeight?: number
+    listMaxHeight?: string
     lrcType?: 0 | 1 | 2 | 3
     fixed?: boolean
     audio: audio[]
