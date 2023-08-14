@@ -1,7 +1,7 @@
 import { usePlayListTrackAll } from '@/api/playlist'
 import { audio } from '@/components/Aplayer/type'
 import { useLyric } from '@/api/lyric'
-import { Song } from '@/api/playlist/type'
+import { Song } from '@/api/song/type'
 
 const getSongUrl = (id: number) => {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
