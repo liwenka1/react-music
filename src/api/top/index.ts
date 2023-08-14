@@ -1,5 +1,5 @@
 import http from '@/utils/request'
-import { PlayListDetail } from './type'
+import { PlayListDetail } from '../playlist/type'
 
 export const useTopPlaylistHighquality = async (params?: {
   limit?: number

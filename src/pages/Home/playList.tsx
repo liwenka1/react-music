@@ -16,10 +16,11 @@ const PlayList = () => {
   const { isLoading, error, data } = useQuery('useTopPlaylistHighquality', () =>
     useTopPlaylistHighquality({ limit: 16, cat: '全部' })
   )
-  const { setAudio } = useAplayerStore()
+  const { ap, setAudio } = useAplayerStore()
 
   const getPlayListTrackAll = async (id: number) => {
     const songList = await setPlayList(id, 10, 0)
+    ap?.list.clear()
     for (const song of songList) {
       const audio = await setSong(song)
       setAudio(audio)

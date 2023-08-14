@@ -1,5 +1,5 @@
 import http from '@/utils/request'
-import { Song } from './type'
+import { Song } from '../song/type'
 
 export const usePlayListTrackAll = async (
   id: number,
