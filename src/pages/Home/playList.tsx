@@ -14,7 +14,7 @@ import useAplayerStore from '@/stores/aplayer'
 
 const PlayList = () => {
   const { isLoading, error, data } = useQuery('useTopPlaylistHighquality', () =>
-    useTopPlaylistHighquality({ limit: 16, cat: '全部' })
+    useTopPlaylistHighquality({ limit: 12, cat: '全部' })
   )
   const { ap, setAudio } = useAplayerStore()
 
@@ -40,7 +40,7 @@ const PlayList = () => {
         <CardTitle>热门推荐</CardTitle>
         <CardDescription>精品歌单</CardDescription>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-8">
+      <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-6">
         {data.playlists.map((item) => {
           return (
             <div className="w-full h-auto cursor-pointer" key={item.id}>
