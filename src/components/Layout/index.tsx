@@ -16,10 +16,10 @@ const Layout = () => {
           </div>
           <div className="main-container">
             <Outlet />
+            <Aplayer />
           </div>
         </div>
       </div>
-      <Aplayer />
     </>
   )
 }
