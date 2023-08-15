@@ -1,0 +1,4 @@
+.aplayer .aplayer-lrc::before,
+.aplayer .aplayer-lrc::after {
+  @apply bg-none;
+}
