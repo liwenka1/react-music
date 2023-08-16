@@ -41,28 +41,28 @@ const SimpleSlider = () => {
   }
   const { isLoading, error, data } = useQuery('useBanner', useBanner)
 
-  if (isLoading || !data) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error occurred</div>
-  }
-
   return (
-    <div className="slick-carousel sm:col-span-full sm:inline-block hidden">
-      <Slider {...settings}>
-        {data.map((item) => (
-          <div key={item.bannerId} className="flex justify-center outline-0">
-            <img
-              src={item.pic}
-              alt={item.typeTitle}
-              className="w-full h-auto rounded scale-95"
-            />
-          </div>
-        ))}
-      </Slider>
-    </div>
+    <>
+      {isLoading && <div>Loading...</div>}
+      {error && <div>Error occurred</div>}
+      <div className="slick-carousel sm:col-span-full sm:inline-block hidden">
+        <Slider {...settings}>
+          {data &&
+            data.map((item) => (
+              <div
+                key={item.bannerId}
+                className="flex justify-center outline-0"
+              >
+                <img
+                  src={item.pic}
+                  alt={item.typeTitle}
+                  className="w-full h-auto rounded scale-95"
+                />
+              </div>
+            ))}
+        </Slider>
+      </div>
+    </>
   )
 }
 
