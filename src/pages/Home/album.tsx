@@ -1,4 +1,4 @@
-import { useAlbumNewest } from '@/api/album'
+import { Album } from '@/api/album/type'
 import {
   Card,
   CardContent,
@@ -6,21 +6,12 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { useQuery } from 'react-query'
 
-const Album = () => {
-  const { isLoading, error, data } = useQuery('useAlbumNewest', () =>
-    useAlbumNewest()
-  )
-  console.log(data)
+interface Props {
+  albums: Album[]
+}
 
-  if (isLoading || !data) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error occurred</div>
-  }
+const Album: React.FC<Props> = (props) => {
   return (
     <Card className="col-span-full">
       <CardHeader>
@@ -28,7 +19,7 @@ const Album = () => {
         <CardDescription>热门新碟</CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-6">
-        {data.albums.map((item) => {
+        {props.albums.map((item) => {
           return (
             <div className="w-full h-auto cursor-pointer" key={item.id}>
               <div className="relative">

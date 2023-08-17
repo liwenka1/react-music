@@ -5,17 +5,17 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { useQuery } from 'react-query'
-import { useTopPlaylistHighquality } from '@/api/top'
 import SvgIcon from '@/components/SvgIcon'
 import { convertToTenThousand } from '@/utils/number'
 import { setPlayList, setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
+import { PlayListDetail } from '@/api/playlist/type'
 
-const PlayList = () => {
-  const { isLoading, error, data } = useQuery('useTopPlaylistHighquality', () =>
-    useTopPlaylistHighquality({ limit: 12, cat: '全部' })
-  )
+interface Props {
+  playlists: PlayListDetail[]
+}
+
+const PlayList: React.FC<Props> = (props) => {
   const { ap, setAudio } = useAplayerStore()
 
   const getPlayListTrackAll = async (id: number) => {
@@ -27,13 +27,6 @@ const PlayList = () => {
     }
   }
 
-  if (isLoading || !data) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error occurred</div>
-  }
   return (
     <Card className="col-span-full">
       <CardHeader>
@@ -41,7 +34,7 @@ const PlayList = () => {
         <CardDescription>精品歌单</CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-6">
-        {data.playlists.map((item) => {
+        {props.playlists.map((item) => {
           return (
             <div className="w-full h-auto cursor-pointer" key={item.id}>
               <div className="relative">

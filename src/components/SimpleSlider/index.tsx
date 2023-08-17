@@ -2,10 +2,9 @@ import { FunctionComponent } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { useQuery } from 'react-query'
-import { useBanner } from '@/api/banner'
 import './index.css'
 import SvgIcon from '../SvgIcon'
+import { Banner } from '@/api/banner/type'
 
 interface ArrowProps {
   onClick?: () => void
@@ -29,7 +28,11 @@ const CustomNextArrow: FunctionComponent<ArrowProps> = (props) => {
   )
 }
 
-const SimpleSlider = () => {
+interface Props {
+  banner: Banner[]
+}
+
+const SimpleSlider: React.FC<Props> = (props) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -39,20 +42,11 @@ const SimpleSlider = () => {
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />
   }
-  const { isLoading, error, data } = useQuery('useBanner', useBanner)
-
-  if (isLoading || !data) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error occurred</div>
-  }
 
   return (
     <div className="slick-carousel sm:col-span-full sm:inline-block hidden">
       <Slider {...settings}>
-        {data.map((item) => (
+        {props.banner.map((item) => (
           <div key={item.bannerId} className="flex justify-center outline-0">
             <img
               src={item.pic}
