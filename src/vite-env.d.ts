@@ -24,6 +24,7 @@ declare module 'APlayer' {
     public init(): void
     public destroy(): void
     public list: {
+      audios: audio[]
       add(audio: audio[] | audio): void
       clear(): void
     }
