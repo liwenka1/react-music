@@ -1,8 +1,6 @@
 import { Suspense } from 'react'
 
-const lazyLoad = (
-  Component: React.LazyExoticComponent<() => JSX.Element | undefined>
-) => {
+const lazyLoad = (Component: React.LazyExoticComponent<React.FC>) => {
   return (
     <Suspense>
       <Component />

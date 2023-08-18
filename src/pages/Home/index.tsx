@@ -6,7 +6,7 @@ import { useBanner } from '@/api/banner'
 import { useTopPlaylistHighquality } from '@/api/top'
 import { useAlbumNewest } from '@/api/album'
 
-const Home = () => {
+const Home: React.FC = () => {
   const [banner, topPlaylistHighquality, albumNewest] = useQueries([
     { queryKey: 'banner', queryFn: () => useBanner() },
     {
