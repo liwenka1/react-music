@@ -1,16 +1,13 @@
 import SvgIcon from '../SvgIcon'
+import { Input } from '../ui/input'
 
 const Search = () => {
   return (
-    <div className="hidden md:flex items-center space-x-2 w-1/2">
-      <div className="flex items-center flex-auto justify-between rounded border border-gray-500">
-        <input
-          className="w-full rounded-l outline-none border-none p-0.5 pl-3 placeholder-gray-500 text-primary bg-background"
-          type="text"
-          placeholder="Search"
-        />
+    <div className="hidden md:flex items-center space-x-2 w-1/2 relative">
+      <div className="flex items-center flex-auto justify-between">
+        <Input placeholder="Search" className="w-full h-auto rounded" />
         <SvgIcon
-          className="md-21 text-center text-primary p-1 w-20 h-7 bg-gray-500 cursor-pointer"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 cursor-pointer"
           name="magnifying-glass"
         />
       </div>
