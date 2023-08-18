@@ -5,6 +5,7 @@ import { useQueries } from 'react-query'
 import { useBanner } from '@/api/banner'
 import { useTopPlaylistHighquality } from '@/api/top'
 import { useAlbumNewest } from '@/api/album'
+import Loading from '@/components/Loading'
 
 const Home: React.FC = () => {
   const [banner, topPlaylistHighquality, albumNewest] = useQueries([
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
     topPlaylistHighquality.isLoading ||
     albumNewest.isLoading
   ) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   if (banner.error || topPlaylistHighquality.error || albumNewest.error) {
