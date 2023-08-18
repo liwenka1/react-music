@@ -53,6 +53,7 @@ const Sidebar = () => {
                   key={index}
                   variant="ghost"
                   className="w-full justify-start font-normal text-left"
+                  onClick={() => ap?.list.switch(index)}
                 >
                   {playlist.name}
                 </Button>

@@ -23,10 +23,12 @@ declare module 'APlayer' {
     constructor(options: APlayerOptions)
     public init(): void
     public destroy(): void
+    public setMode(mode: string): void
     public list: {
       audios: audio[]
       add(audio: audio[] | audio): void
       clear(): void
+      switch(index: number): void
     }
   }
 }
