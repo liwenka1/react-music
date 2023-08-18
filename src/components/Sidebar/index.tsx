@@ -72,9 +72,9 @@ const Sidebar = () => {
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Switch
           </h2>
-          <div className="space-y-1 px-4">
+          <div className="space-y-1 px-4 flex items-center">
             <span>nomal</span>
-            <Switch onClick={() => switchMode(ap?.mode)} />
+            <Switch className="mx-2" onClick={() => switchMode(ap?.mode)} />
             <span>mini</span>
           </div>
         </div>
