@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { ScrollArea } from '../ui/scroll-area'
+import { Switch } from '../ui/switch'
 import useAplayerStore from '@/stores/aplayer'
 
 const Sidebar = () => {
@@ -15,12 +16,18 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { ap } = useAplayerStore()
-  console.log(ap?.list.audios)
   const playlists = ap?.list.audios
+  const switchMode = (mode: string | undefined) => {
+    if (mode == 'normal') {
+      ap?.setMode('mini')
+    } else if (mode == 'mini') {
+      ap?.setMode('normal')
+    }
+  }
 
   return (
     <>
-      <div className="sidebar pb-12">
+      <div className="sidebar">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Discover
@@ -60,6 +67,16 @@ const Sidebar = () => {
               ))}
             </div>
           </ScrollArea>
+        </div>
+        <div className="px-3 py-2">
+          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+            Switch
+          </h2>
+          <div className="space-y-1 px-4">
+            <span>nomal</span>
+            <Switch onClick={() => switchMode(ap?.mode)} />
+            <span>mini</span>
+          </div>
         </div>
       </div>
     </>
