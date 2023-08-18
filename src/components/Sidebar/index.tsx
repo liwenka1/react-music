@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import { Button } from '../ui/button'
 
 const Sidebar = () => {
   const sidebarItems = [
@@ -13,31 +14,33 @@ const Sidebar = () => {
   const location = useLocation()
 
   return (
-    <div className="sidebar">
-      <div className="flex flex-col w-full mb-2">
-        {sidebarItems.map((item, index) => {
-          return (
-            <div
-              className={`flex items-center space-x-5 px-7 py-2.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-500 ${
-                item.link == location.pathname
-                  ? 'bg-gray-200 dark:bg-gray-500'
-                  : ''
-              }`}
-              key={index}
-              onClick={() => navigate(item.link)}
-            >
-              <h2
-                className={`text-sm ${
-                  item.link == location.pathname ? 'font-semibold' : ''
-                }`}
-              >
-                {item.title}
-              </h2>
+    <>
+      <div className="sidebar pb-12">
+        <div className="space-y-4 py-4">
+          <div className="px-3 py-2">
+            <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+              Discover
+            </h2>
+            <div className="space-y-1">
+              {sidebarItems.map((item) => {
+                return (
+                  <Button
+                    variant={
+                      item.link == location.pathname ? 'secondary' : 'ghost'
+                    }
+                    className="w-full justify-start"
+                    key={item.link}
+                    onClick={() => navigate(item.link)}
+                  >
+                    {item.title}
+                  </Button>
+                )
+              })}
             </div>
-          )
-        })}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
