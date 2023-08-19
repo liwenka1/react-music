@@ -11,6 +11,9 @@ const Playlist = lazy(() => import('@/pages/Playlist'))
 const Artist = lazy(() => import('@/pages/Artist'))
 const Album = lazy(() => import('@/pages/Album'))
 const About = lazy(() => import('@/pages/About'))
+const PlaylistDetails = lazy(() => import('@/pages/PlaylistDetails'))
+const AlbumDetails = lazy(() => import('@/pages/AlbumDetails'))
+const ArtistDetails = lazy(() => import('@/pages/ArtistDetails'))
 
 const routes: RouteObject[] = [
   {
@@ -45,6 +48,18 @@ const routes: RouteObject[] = [
       {
         path: 'about',
         element: lazyLoad(About)
+      },
+      {
+        path: 'playlistDetails',
+        element: lazyLoad(PlaylistDetails)
+      },
+      {
+        path: 'albumDetails',
+        element: lazyLoad(AlbumDetails)
+      },
+      {
+        path: 'artistDetails',
+        element: lazyLoad(ArtistDetails)
       }
     ]
   }
