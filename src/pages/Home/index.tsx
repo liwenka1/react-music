@@ -12,7 +12,7 @@ const Home: React.FC = () => {
     { queryKey: 'banner', queryFn: () => useBanner() },
     {
       queryKey: 'topPlaylistHighquality',
-      queryFn: () => useTopPlaylistHighquality({ limit: 12, cat: '全部' })
+      queryFn: () => useTopPlaylistHighquality({ limit: 10, cat: '全部' })
     },
     { queryKey: 'AlbumNewest', queryFn: () => useAlbumNewest() }
   ])

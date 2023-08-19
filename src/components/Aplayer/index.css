@@ -2,3 +2,11 @@
 .aplayer .aplayer-lrc::after {
   @apply bg-none;
 }
+
+.aplayer .aplayer-list ol li.aplayer-list-light {
+  @apply dark:text-black;
+}
+
+.aplayer .aplayer-list ol li {
+  @apply dark:hover:text-black;
+}

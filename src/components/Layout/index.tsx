@@ -10,7 +10,7 @@ const Layout = () => {
         <Sidebar />
         <div className="flex flex-col lg:ml-60 w-full">
           <Nav />
-          <div className="overflow-y-auto flex-1">
+          <div className="overflow-y-auto flex-1 mb-8">
             <div className="main-container">
               <Outlet />
             </div>

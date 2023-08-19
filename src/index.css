@@ -60,7 +60,7 @@
 }
 
 .sidebar {
-  @apply hidden fixed w-60 h-full lg:flex flex-col pb-16 pr-4 pt-2;
+  @apply hidden fixed w-60 h-full lg:flex flex-col pb-16 pr-4 pt-12;
 }
 
 .tags-container {

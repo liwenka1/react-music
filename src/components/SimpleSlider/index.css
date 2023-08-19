@@ -1,16 +1,7 @@
-.custom-prev-arrow,
-.custom-next-arrow {
-  @apply absolute top-1/2 transform -translate-y-1/2 bg-transparent text-primary cursor-pointer;
-}
-
-.custom-prev-arrow {
-  @apply -left-6;
-}
-
-.custom-next-arrow {
-  @apply -right-6;
-}
-
 .slick-dots li button::before {
   @apply dark:text-white;
+}
+
+.slick-slider {
+  @apply mx-[-0.5rem] box-content;
 }

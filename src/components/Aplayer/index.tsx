@@ -14,7 +14,9 @@ const Aplayer = () => {
     }
   }, [])
 
-  return <div className="playMusic w-auto h-auto bg-background p-0 m-0"></div>
+  return (
+    <div className="playMusic w-auto h-auto bg-background p-0 m-0 ml-6 rounded-md"></div>
+  )
 }
 
 export default Aplayer
