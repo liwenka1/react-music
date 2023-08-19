@@ -27,7 +27,7 @@ const SimpleSlider: React.FC<Props> = (props) => {
             <img
               src={item.pic}
               alt={item.typeTitle}
-              className="w-full h-auto rounded-md"
+              className="w-full h-auto rounded-md cursor-pointer"
             />
           </div>
         ))}
