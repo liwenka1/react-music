@@ -1,4 +1,4 @@
-.cover-play-image {
+.cover-playlist {
   @apply rounded-md cursor-pointer transition-all relative overflow-hidden;
   @apply hover:-translate-y-1;
 

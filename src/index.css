@@ -78,7 +78,7 @@
 
 /* 滚动条上的滚动滑块 */
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-500 rounded;
+  @apply bg-primary rounded;
 }
 
 /* 滚动条轨道 */

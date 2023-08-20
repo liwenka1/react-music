@@ -9,7 +9,7 @@ interface props {
 
 const CoverPlaylist: React.FC<props> = (props) => {
   return (
-    <div className="cover-play-image">
+    <div className="cover-playlist">
       <img
         src={props.playListDetail.coverImgUrl}
         alt={props.playListDetail.name}

@@ -10,10 +10,8 @@ const Layout: React.FC = () => {
         <Sidebar />
         <div className="flex flex-col lg:ml-60 w-full">
           <Nav />
-          <div className="overflow-y-auto flex-1 mb-8">
-            <div className="main-container">
-              <Outlet />
-            </div>
+          <div className="main-container overflow-y-auto flex-1">
+            <Outlet />
           </div>
           <Aplayer />
         </div>
