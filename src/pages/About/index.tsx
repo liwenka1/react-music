@@ -7,7 +7,7 @@ import {
   CardTitle
 } from '@/components/ui/card'
 
-const About = () => {
+const About: React.FC = () => {
   return (
     <>
       <Card>

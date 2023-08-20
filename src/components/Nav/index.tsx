@@ -1,7 +1,7 @@
 import Search from './search'
 import User from './user'
 
-const Nav = () => {
+const Nav: React.FC = () => {
   return (
     <nav className="w-full pb-2 pt-2">
       <div className="flex justify-between items-center px-2 sm:px-6 py-1">

@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const sidebarItems = [
     { title: '推荐', link: '/home' },
     { title: '排行榜', link: '/toplist' },

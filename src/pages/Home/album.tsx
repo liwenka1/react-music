@@ -30,11 +30,11 @@ const Album: React.FC<Props> = (props) => {
           onClick={navigateToAlbum}
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {props.albums.map((item) => {
           return (
             <div
-              className="w-full h-auto flex items-center rounded-md hover:bg-secondary/80 hover:scale-105"
+              className="w-full h-auto flex items-center rounded-md hover:bg-secondary/80 transition ease-in-out delay-150 duration-300"
               key={item.id}
             >
               <div

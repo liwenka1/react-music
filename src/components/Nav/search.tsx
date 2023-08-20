@@ -1,7 +1,7 @@
 import SvgIcon from '../SvgIcon'
 import { Input } from '../ui/input'
 
-const Search = () => {
+const Search: React.FC = () => {
   return (
     <div className="hidden md:flex items-center space-x-2 w-1/2 relative">
       <div className="flex items-center flex-auto justify-between">

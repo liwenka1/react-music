@@ -3,7 +3,7 @@ import Nav from '@/components/Nav'
 import Sidebar from '@/components/Sidebar'
 import Aplayer from '@/components/Aplayer'
 
-const Layout = () => {
+const Layout: React.FC = () => {
   return (
     <>
       <div className="flex flex-row h-screen">

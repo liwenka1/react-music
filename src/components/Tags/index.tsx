@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSearchHot } from '@/api/search'
 import { useQuery } from 'react-query'
 
-const Tags = () => {
+const Tags: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const { isLoading, error, data } = useQuery('useSearchHot', useSearchHot)
 

@@ -1,17 +1,19 @@
-export default function SvgIcon({
+interface Props {
+  className: string
+  name: string
+  prefix?: string
+  color?: string
+  onClick?: () => void
+}
+
+const SvgIcon: React.FC<Props> = ({
   className,
   name,
   prefix = 'icon',
   color = '#333',
   onClick,
   ...props
-}: {
-  className: string
-  name: string
-  prefix?: string
-  color?: string
-  onClick?: () => void
-}) {
+}) => {
   const symbolId = `#${prefix}-${name}`
 
   return (
@@ -20,3 +22,5 @@ export default function SvgIcon({
     </svg>
   )
 }
+
+export default SvgIcon

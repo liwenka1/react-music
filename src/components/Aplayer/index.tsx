@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import useAplayerStore from '@/stores/aplayer'
 import './index.css'
 
-const Aplayer = () => {
+const Aplayer: React.FC = () => {
   const { ap, initializeAplayer } = useAplayerStore()
 
   useEffect(() => {

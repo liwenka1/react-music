@@ -5,7 +5,7 @@ interface ErrorType {
   message: string
 }
 
-const ErrorBoundary = () => {
+const ErrorBoundary: React.FC = () => {
   const error = useRouteError() as ErrorType
 
   return (
