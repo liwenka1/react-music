@@ -34,7 +34,7 @@ const Album: React.FC<Props> = (props) => {
         {props.albums.map((item) => {
           return (
             <div
-              className="w-full h-auto flex items-center rounded-md hover:bg-secondary/80 transition ease-in-out delay-150 duration-300"
+              className="w-full h-auto flex items-center rounded-md hover:bg-secondary/80 transition-all"
               key={item.id}
             >
               <div

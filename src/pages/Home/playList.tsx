@@ -25,8 +25,8 @@ const PlayList: React.FC<Props> = (props) => {
   const navigateToPlaylist = () => {
     navigate('/playlist')
   }
-  const navigateToPlaylistDetails = () => {
-    navigate('/playlistDetails')
+  const navigateToPlaylistDetails = (playlistId: number) => {
+    navigate('/playlistDetails', { state: { playlistId } })
   }
 
   return (
@@ -47,7 +47,7 @@ const PlayList: React.FC<Props> = (props) => {
             <div
               className="w-full h-auto cursor-pointer"
               key={item.id}
-              onClick={navigateToPlaylistDetails}
+              onClick={() => navigateToPlaylistDetails(item.id)}
             >
               <CoverPlaylist playListDetail={item} />
               <p
