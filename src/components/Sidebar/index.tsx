@@ -24,9 +24,7 @@ const Sidebar: React.FC = () => {
             {sidebarItems.map((item) => {
               return (
                 <Button
-                  variant={
-                    item.link == location.pathname ? 'secondary' : 'ghost'
-                  }
+                  variant={item.link == location.pathname ? 'default' : 'ghost'}
                   className="w-full justify-start"
                   key={item.link}
                   onClick={() => navigate(item.link)}

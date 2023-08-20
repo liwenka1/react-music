@@ -25,6 +25,10 @@ const PlayList: React.FC<Props> = (props) => {
   const navigateToPlaylist = () => {
     navigate('/playlist')
   }
+  const navigateToPlaylistDetails = () => {
+    navigate('/playlistDetails')
+  }
+
   return (
     <div className="col-span-full">
       <div className="flex items-center mb-4">
@@ -39,7 +43,21 @@ const PlayList: React.FC<Props> = (props) => {
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-10">
         {props.playlists.map((item) => {
-          return <CoverPlaylist playListDetail={item} key={item.id} />
+          return (
+            <div
+              className="w-full h-auto cursor-pointer"
+              key={item.id}
+              onClick={navigateToPlaylistDetails}
+            >
+              <CoverPlaylist playListDetail={item} />
+              <p
+                className="hover:underline hover:underline-offset-1 line-clamp-2"
+                title={item.name}
+              >
+                {item.name}
+              </p>
+            </div>
+          )
         })}
       </div>
     </div>
