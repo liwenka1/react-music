@@ -25,7 +25,7 @@ const useAplayerStore = create<AplayerState>((set) => ({
         volume: 0.7,
         mutex: true,
         listFolded: true,
-        listMaxHeight: '150px',
+        listMaxHeight: '250px',
         lrcType: 1,
         audio: state.audio
       })

@@ -1,7 +1,8 @@
 import { useNumberFormat } from '@/utils/number'
 import SvgIcon from '@/components/SvgIcon'
 import './index.css'
-import { setPlayList, setSong } from '@/utils/aplayer'
+import { setSong } from '@/utils/aplayer'
+import { usePlayListTrackAll } from '@/api/playlist'
 import useAplayerStore from '@/stores/aplayer'
 import { SyntheticEvent } from 'react'
 
@@ -19,7 +20,7 @@ const CoverImage: React.FC<props> = (props) => {
   const playPlaylist = async (e: SyntheticEvent, id: number) => {
     e.stopPropagation()
     e.nativeEvent.stopImmediatePropagation()
-    const audioList = await setPlayList(id)
+    const audioList = await usePlayListTrackAll(id)
     ap?.list.clear()
     for (const audio of audioList) {
       setAudio(await setSong(audio))

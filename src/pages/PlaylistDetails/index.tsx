@@ -1,19 +1,40 @@
 import { useLocation } from 'react-router-dom'
-import { setPlayList, setSong } from '@/utils/aplayer'
-import { useEffect } from 'react'
+import { useQueries } from 'react-query'
+import { usePlayListDetail, usePlayListTrackAll } from '@/api/playlist'
+import Loading from '@/components/Loading'
+import Header from './header'
+import Main from './main'
 
 const PlaylistDetails: React.FC = () => {
   const location = useLocation()
-  console.log(location)
-  const getPlayListTrackAll = async (id: number) => {
-    const songList = await setPlayList(id, 10, 0)
-    console.log(songList, setSong)
-  }
-  useEffect(() => {
-    getPlayListTrackAll(location.state.playlistId)
-  }, [])
+  const [playListDetail, playListTrackAll] = useQueries([
+    {
+      queryKey: 'playListDetail',
+      queryFn: () => usePlayListDetail(location.state.playlistId)
+    },
+    {
+      queryKey: 'playListTrackAll',
+      queryFn: () => usePlayListTrackAll(location.state.playlistId)
+    }
+  ])
+  console.log(playListDetail, playListTrackAll)
 
-  return <div>这里是PlaylistDetails</div>
+  if (playListDetail.isLoading || playListTrackAll.isLoading) {
+    return <Loading />
+  }
+
+  if (playListDetail.error || playListTrackAll.error) {
+    return <div>Error occurred while fetching data.</div>
+  }
+
+  if (playListDetail.isSuccess && playListTrackAll.isSuccess) {
+    return (
+      <>
+        <Header />
+        <Main />
+      </>
+    )
+  }
 }
 
 export default PlaylistDetails

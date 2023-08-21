@@ -1,4 +1,3 @@
-import { usePlayListTrackAll } from '@/api/playlist'
 import { audio } from '@/components/Aplayer/type'
 import { useLyric } from '@/api/lyric'
 import { Song } from '@/api/song/type'
@@ -13,35 +12,26 @@ const getLyric = async (id: number) => {
   return res.lrc.lyric
 }
 
-export const setPlayList = async (
-  id: number,
-  limit?: number,
-  offect?: number
-): Promise<Song[]> => {
-  const songList = await usePlayListTrackAll(id, limit, offect)
-  return songList
-}
-
-export const setSong = async (x: Song): Promise<audio> => {
-  const lrc = await getLyric(x.id)
-  const audio = {
-    name: x.al.name,
-    artist: x.ar[0].name,
-    url: getSongUrl(x.id),
-    cover: x.al.picUrl,
+export const setSong = async (audio: Song): Promise<audio> => {
+  const lrc = await getLyric(audio.id)
+  return {
+    name: audio.al.name,
+    artist: audio.ar[0].name,
+    url: getSongUrl(audio.id),
+    cover: audio.al.picUrl,
     lrc
   }
-  return audio
 }
 
-export const setNewSong = async (x: PersonalizedNewSong): Promise<audio> => {
-  const lrc = await getLyric(x.id)
-  const audio = {
-    name: x.name,
-    artist: x.song.artists.map((artist) => artist.name).join('/'),
-    url: getSongUrl(x.id),
-    cover: x.picUrl,
+export const setNewSong = async (
+  audio: PersonalizedNewSong
+): Promise<audio> => {
+  const lrc = await getLyric(audio.id)
+  return {
+    name: audio.name,
+    artist: audio.song.artists.map((artist) => artist.name).join('/'),
+    url: getSongUrl(audio.id),
+    cover: audio.picUrl,
     lrc
   }
-  return audio
 }
