@@ -9,9 +9,6 @@ interface Props {
 
 const NewPlaylist: React.FC<Props> = (props) => {
   const navigate = useNavigate()
-  const navigateToPlaylist = () => {
-    navigate('/playlist')
-  }
   const navigateToPlaylistDetails = (playlistId: number) => {
     navigate('/playlistDetails', { state: { playlistId } })
   }
@@ -19,16 +16,10 @@ const NewPlaylist: React.FC<Props> = (props) => {
   return (
     <div className="col-span-full">
       <div className="flex items-center mb-4">
-        <h2 className="text-xl cursor-pointer" onClick={navigateToPlaylist}>
-          推荐歌单
-        </h2>
-        <SvgIcon
-          className="w-6 h-6 cursor-pointer"
-          name="chevron-right"
-          onClick={navigateToPlaylist}
-        ></SvgIcon>
+        <h2 className="text-xl">推荐歌单</h2>
+        <SvgIcon className="w-6 h-6" name="chevron-right"></SvgIcon>
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-10">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
         {props.personalized.map((item) => {
           return (
             <div
@@ -40,6 +31,7 @@ const NewPlaylist: React.FC<Props> = (props) => {
                 imgUrl={item.picUrl}
                 imgAlt={item.name}
                 playCount={item.playCount}
+                id={item.id}
               />
               <p
                 className="hover:underline hover:underline-offset-1 line-clamp-2"

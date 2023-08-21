@@ -2,6 +2,7 @@ import { usePlayListTrackAll } from '@/api/playlist'
 import { audio } from '@/components/Aplayer/type'
 import { useLyric } from '@/api/lyric'
 import { Song } from '@/api/song/type'
+import { PersonalizedNewSong } from '@/api/personalized/type'
 
 const getSongUrl = (id: number) => {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
@@ -14,8 +15,8 @@ const getLyric = async (id: number) => {
 
 export const setPlayList = async (
   id: number,
-  limit: number,
-  offect: number
+  limit?: number,
+  offect?: number
 ): Promise<Song[]> => {
   const songList = await usePlayListTrackAll(id, limit, offect)
   return songList
@@ -28,6 +29,18 @@ export const setSong = async (x: Song): Promise<audio> => {
     artist: x.ar[0].name,
     url: getSongUrl(x.id),
     cover: x.al.picUrl,
+    lrc
+  }
+  return audio
+}
+
+export const setNewSong = async (x: PersonalizedNewSong): Promise<audio> => {
+  const lrc = await getLyric(x.id)
+  const audio = {
+    name: x.name,
+    artist: x.song.artists.map((artist) => artist.name).join('/'),
+    url: getSongUrl(x.id),
+    cover: x.picUrl,
     lrc
   }
   return audio

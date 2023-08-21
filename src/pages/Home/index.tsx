@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     { queryKey: 'banner', queryFn: () => useBanner() },
     {
       queryKey: 'personalized',
-      queryFn: () => usePersonalized(10)
+      queryFn: () => usePersonalized(12)
     },
     {
       queryKey: 'personalizedNewSong',

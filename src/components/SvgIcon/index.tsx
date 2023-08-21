@@ -1,9 +1,11 @@
+import { SyntheticEvent } from 'react'
+
 interface Props {
-  className: string
+  className?: string
   name: string
   prefix?: string
   color?: string
-  onClick?: () => void
+  onClick?: (e: SyntheticEvent) => void
 }
 
 const SvgIcon: React.FC<Props> = ({
