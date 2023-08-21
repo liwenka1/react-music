@@ -1,12 +1,12 @@
-import { Album } from '@/api/album/type'
+import { PersonalizedNewSong } from '@/api/personalized/type'
 import SvgIcon from '@/components/SvgIcon'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
-  albums: Album[]
+  personalizedNewSong: PersonalizedNewSong[]
 }
 
-const Album: React.FC<Props> = (props) => {
+const NewSong: React.FC<Props> = (props) => {
   const navigate = useNavigate()
   const navigateToAlbum = () => {
     navigate('/album')
@@ -22,7 +22,7 @@ const Album: React.FC<Props> = (props) => {
     <div className="col-span-full">
       <div className="flex items-center mb-4">
         <h2 className="text-xl cursor-pointer" onClick={navigateToAlbum}>
-          新碟推荐
+          推荐新音乐
         </h2>
         <SvgIcon
           className="w-6 h-6 cursor-pointer"
@@ -30,19 +30,19 @@ const Album: React.FC<Props> = (props) => {
           onClick={navigateToAlbum}
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {props.albums.map((item) => {
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-5">
+        {props.personalizedNewSong.map((item) => {
           return (
             <div
               className="w-full h-auto flex items-center rounded-md hover:bg-secondary/80 transition-all"
               key={item.id}
             >
-              <div
-                className="w-1/4 mr-4 cursor-pointer"
+              <img
+                src={item.picUrl}
+                alt={item.name}
+                className="object-cover rounded-md w-1/5 h-auto mr-4 cursor-pointer"
                 onClick={navigateToAlbumDetails}
-              >
-                <img src={item.picUrl} alt={item.name} className="rounded-md" />
-              </div>
+              />
               <div>
                 <p
                   className="hover:underline hover:underline-offset-1 line-clamp-1 cursor-pointer"
@@ -53,10 +53,10 @@ const Album: React.FC<Props> = (props) => {
                 </p>
                 <p
                   className="hover:underline hover:underline-offset-1 font-extralight line-clamp-1 cursor-pointer"
-                  title={item.artist.name}
+                  title={item.song.artists[0].name}
                   onClick={navigateToArtistDetails}
                 >
-                  {item.artist.name}
+                  {item.song.artists[0].name}
                 </p>
               </div>
             </div>
@@ -67,4 +67,4 @@ const Album: React.FC<Props> = (props) => {
   )
 }
 
-export default Album
+export default NewSong

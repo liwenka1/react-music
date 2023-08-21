@@ -1,44 +1,46 @@
 import SimpleSlider from '@/components/SimpleSlider'
-import PlayList from './playList'
-import Album from './album'
+import NewPlaylist from './newPlaylist'
+import NewSong from './newSong'
 import { useQueries } from 'react-query'
 import { useBanner } from '@/api/banner'
-import { useTopPlaylistHighquality } from '@/api/top'
-import { useAlbumNewest } from '@/api/album'
+import { usePersonalized, usePersonalizedNewSong } from '@/api/personalized'
 import Loading from '@/components/Loading'
 
 const Home: React.FC = () => {
-  const [banner, topPlaylistHighquality, albumNewest] = useQueries([
+  const [banner, personalized, personalizedNewSong] = useQueries([
     { queryKey: 'banner', queryFn: () => useBanner() },
     {
-      queryKey: 'topPlaylistHighquality',
-      queryFn: () => useTopPlaylistHighquality({ limit: 10, cat: '全部' })
+      queryKey: 'personalized',
+      queryFn: () => usePersonalized(10)
     },
-    { queryKey: 'AlbumNewest', queryFn: () => useAlbumNewest() }
+    {
+      queryKey: 'personalizedNewSong',
+      queryFn: () => usePersonalizedNewSong()
+    }
   ])
 
   if (
     banner.isLoading ||
-    topPlaylistHighquality.isLoading ||
-    albumNewest.isLoading
+    personalized.isLoading ||
+    personalizedNewSong.isLoading
   ) {
     return <Loading />
   }
 
-  if (banner.error || topPlaylistHighquality.error || albumNewest.error) {
+  if (banner.error || personalized.error || personalizedNewSong.error) {
     return <div>Error occurred while fetching data.</div>
   }
 
   if (
     banner.isSuccess &&
-    topPlaylistHighquality.isSuccess &&
-    albumNewest.isSuccess
+    personalized.isSuccess &&
+    personalizedNewSong.isSuccess
   ) {
     return (
       <>
         <SimpleSlider banner={banner.data} />
-        <PlayList playlists={topPlaylistHighquality.data.playlists} />
-        <Album albums={albumNewest.data.albums} />
+        <NewPlaylist personalized={personalized.data} />
+        <NewSong personalizedNewSong={personalizedNewSong.data} />
       </>
     )
   }

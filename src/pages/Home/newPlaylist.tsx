@@ -1,26 +1,13 @@
 import SvgIcon from '@/components/SvgIcon'
-// import { setPlayList, setSong } from '@/utils/aplayer'
-// import useAplayerStore from '@/stores/aplayer'
-import { PlayListDetail } from '@/api/playlist/type'
 import { useNavigate } from 'react-router-dom'
-import CoverPlaylist from '@/components/CoverPlaylist'
+import CoverImage from '@/components/CoverImage'
+import { Personalized } from '@/api/personalized/type'
 
 interface Props {
-  playlists: PlayListDetail[]
+  personalized: Personalized[]
 }
 
-const PlayList: React.FC<Props> = (props) => {
-  // const { ap, setAudio } = useAplayerStore()
-
-  // const getPlayListTrackAll = async (id: number) => {
-  //   const songList = await setPlayList(id, 10, 0)
-  //   ap?.list.clear()
-  //   for (const song of songList) {
-  //     const audio = await setSong(song)
-  //     setAudio(audio)
-  //   }
-  // }
-
+const NewPlaylist: React.FC<Props> = (props) => {
   const navigate = useNavigate()
   const navigateToPlaylist = () => {
     navigate('/playlist')
@@ -33,7 +20,7 @@ const PlayList: React.FC<Props> = (props) => {
     <div className="col-span-full">
       <div className="flex items-center mb-4">
         <h2 className="text-xl cursor-pointer" onClick={navigateToPlaylist}>
-          歌单推荐
+          推荐歌单
         </h2>
         <SvgIcon
           className="w-6 h-6 cursor-pointer"
@@ -42,14 +29,18 @@ const PlayList: React.FC<Props> = (props) => {
         ></SvgIcon>
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-10">
-        {props.playlists.map((item) => {
+        {props.personalized.map((item) => {
           return (
             <div
               className="w-full h-auto cursor-pointer"
               key={item.id}
               onClick={() => navigateToPlaylistDetails(item.id)}
             >
-              <CoverPlaylist playListDetail={item} />
+              <CoverImage
+                imgUrl={item.picUrl}
+                imgAlt={item.name}
+                playCount={item.playCount}
+              />
               <p
                 className="hover:underline hover:underline-offset-1 line-clamp-2"
                 title={item.name}
@@ -64,4 +55,4 @@ const PlayList: React.FC<Props> = (props) => {
   )
 }
 
-export default PlayList
+export default NewPlaylist
