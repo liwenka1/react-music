@@ -18,7 +18,7 @@ const useAplayerStore = create<AplayerState>((set) => ({
         mini: false,
         autoplay: false,
         fixed: false,
-        theme: '#FADFA3',
+        theme: '#16A34A',
         loop: 'all',
         order: 'random',
         preload: 'auto',

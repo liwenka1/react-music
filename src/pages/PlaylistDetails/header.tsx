@@ -27,27 +27,31 @@ const Header: React.FC<Props> = (props) => {
         src={playListDetail.coverImgUrl}
         alt={playListDetail.name}
       />
-      <div className="col-span-6">
-        <h1 className="text-3xl font-bold my-2">{playListDetail.name}</h1>
-        <div className="flex flex-row my-2 items-center">
-          <img
-            className="w-6 rounded-full"
-            src={playListDetail.creator.avatarUrl}
-            alt=""
-          />
-          <span className="text-sm mx-2 cursor-pointer hover:text-primary">
-            {playListDetail.creator.nickname}
-          </span>
-          {playListDetail.tags.map((tag, index) => {
-            return (
-              <span className="mx-2 text-xs font-light" key={index}>
-                {'#' + tag}
-              </span>
-            )
-          })}
+      <div className="col-span-6 flex flex-col justify-between">
+        <div>
+          <h1 className="text-3xl font-bold my-2">{playListDetail.name}</h1>
+          <div className="flex flex-row my-2 items-center">
+            <img
+              className="w-6 rounded-full"
+              src={playListDetail.creator.avatarUrl}
+              alt=""
+            />
+            <span className="text-sm mx-2 cursor-pointer hover:text-primary">
+              {playListDetail.creator.nickname}
+            </span>
+            {playListDetail.tags.map((tag, index) => {
+              return (
+                <span className="mx-2 text-xs font-light" key={index}>
+                  {'#' + tag}
+                </span>
+              )
+            })}
+          </div>
+          <p className="text-xs font-light mt-4">
+            {playListDetail.description}
+          </p>
         </div>
-        <p className="text-xs font-light my-4">{playListDetail.description}</p>
-        <div className="flex mt-8">
+        <div className="flex mb-2">
           <span
             className="svg-button bg-primary text-white mr-2"
             onClick={playPlaylist}
