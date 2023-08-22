@@ -1,6 +1,7 @@
 import http from '@/utils/request'
 import { PlayListDetail } from '../playlist/type'
 
+// 获取精品歌单
 export const useTopPlaylistHighquality = async (params?: {
   limit?: number
   before?: number
@@ -11,6 +12,6 @@ export const useTopPlaylistHighquality = async (params?: {
     total: number
     more: boolean
     lasttime: number
-  }>('top/playlist/highquality', params)
+  }>('/top/playlist/highquality', params)
   return result
 }

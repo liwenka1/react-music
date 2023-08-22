@@ -8,7 +8,7 @@ export const usePlayListTrackAll = async (
   limit?: number,
   offset?: number
 ) => {
-  const { songs } = await http.get<{ songs: Song[] }>('playlist/track/all', {
+  const { songs } = await http.get<{ songs: Song[] }>('/playlist/track/all', {
     id: id,
     limit: limit,
     offset: offset

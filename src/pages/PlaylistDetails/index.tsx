@@ -17,7 +17,6 @@ const PlaylistDetails: React.FC = () => {
       queryFn: () => usePlayListTrackAll(location.state.playlistId)
     }
   ])
-  console.log(playListDetail, playListTrackAll)
 
   if (playListDetail.isLoading || playListTrackAll.isLoading) {
     return <Loading />
@@ -30,8 +29,8 @@ const PlaylistDetails: React.FC = () => {
   if (playListDetail.isSuccess && playListTrackAll.isSuccess) {
     return (
       <>
-        <Header />
-        <Main />
+        <Header playListDetail={playListDetail.data} />
+        <Main playListTrackAll={playListTrackAll.data} />
       </>
     )
   }
