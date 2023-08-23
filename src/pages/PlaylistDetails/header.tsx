@@ -1,21 +1,21 @@
 import { PlayListDetail } from '@/api/playlist/type'
+import { Song } from '@/api/song/type'
 import SvgIcon from '@/components/SvgIcon'
 import './header.css'
-import { usePlayListTrackAll } from '@/api/playlist'
 import { setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
 
 interface Props {
   playListDetail: PlayListDetail
+  playListTrackAll: Song[]
 }
 
 const Header: React.FC<Props> = (props) => {
-  const { playListDetail } = props
+  const { playListDetail, playListTrackAll } = props
   const { ap, setAudio } = useAplayerStore()
   const playPlaylist = async () => {
-    const audioList = await usePlayListTrackAll(playListDetail.id)
     ap?.list.clear()
-    for (const audio of audioList) {
+    for (const audio of playListTrackAll) {
       setAudio(await setSong(audio))
     }
   }

@@ -30,7 +30,10 @@ const PlaylistDetails: React.FC = () => {
     return (
       <>
         <div className="col-span-full flex flex-col">
-          <Header playListDetail={playListDetail.data} />
+          <Header
+            playListDetail={playListDetail.data}
+            playListTrackAll={playListTrackAll.data}
+          />
           <Main playListTrackAll={playListTrackAll.data} />
         </div>
       </>
