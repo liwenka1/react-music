@@ -12,7 +12,7 @@ const SvgIcon: React.FC<Props> = ({
   className,
   name,
   prefix = 'icon',
-  color = '#333',
+  color,
   onClick,
   ...props
 }) => {
