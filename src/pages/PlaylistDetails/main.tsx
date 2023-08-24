@@ -4,6 +4,7 @@ import { useFormatDuring } from '@/utils/number'
 import SvgIcon from '@/components/SvgIcon'
 import { setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   playListTrackAll: Song[]
@@ -11,12 +12,19 @@ interface Props {
 
 const Main: React.FC<Props> = (props) => {
   const { playListTrackAll } = props
-  console.log(playListTrackAll)
 
   const { setAudio } = useAplayerStore()
   const playSong = async (song: Song) => {
     const audio = await setSong(song)
     setAudio(audio)
+  }
+
+  const navigate = useNavigate()
+  const navigateToArtistDetails = (artistId: number) => {
+    navigate('/artistDetails', { state: { artistId } })
+  }
+  const navigateToAlbumDetails = (albumId: number) => {
+    navigate('/albumDetails', { state: { albumId } })
   }
 
   return (
@@ -51,10 +59,26 @@ const Main: React.FC<Props> = (props) => {
                   <SvgIcon name="plus-circle" className="svg-icon" />
                 </div>
               </div>
-              <span className="col-span-3 cursor-pointer hover:text-primary">
-                {song.ar.map((artist) => artist.name).join('/')}
+              <span className="col-span-3 ">
+                {song.ar.map((artist, index) => {
+                  return (
+                    <>
+                      <span
+                        className="cursor-pointer hover:text-primary"
+                        key={artist.id}
+                        onClick={() => navigateToArtistDetails(artist.id)}
+                      >
+                        {artist.name}
+                      </span>
+                      {index != song.ar.length - 1 && <span>/</span>}
+                    </>
+                  )
+                })}
               </span>
-              <span className="col-span-3 cursor-pointer hover:text-primary">
+              <span
+                className="col-span-3 cursor-pointer hover:text-primary"
+                onClick={() => navigateToAlbumDetails(song.al.id)}
+              >
                 {song.al.name}
               </span>
               <span className="col-span-1">
