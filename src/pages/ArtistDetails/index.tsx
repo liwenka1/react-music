@@ -8,6 +8,7 @@ import {
 } from '@/api/artist'
 import Header from './header'
 import Loading from '@/components/Loading'
+import Main from './main'
 
 const ArtistDetails: React.FC = () => {
   const location = useLocation()
@@ -29,7 +30,7 @@ const ArtistDetails: React.FC = () => {
       queryFn: () => useArtistAlbum(location.state.artistId)
     }
   ])
-  console.log(artists, artistSongs, artistAlbum)
+  console.log(artists, artistAlbum)
 
   if (artists.isLoading) {
     return <Loading />
@@ -39,12 +40,12 @@ const ArtistDetails: React.FC = () => {
     return <div>Error occurred while fetching data.</div>
   }
 
-  if (artists.isSuccess && artistDetail.isSuccess) {
+  if (artists.isSuccess && artistSongs.isSuccess && artistDetail.isSuccess) {
     return (
       <>
         <div className="col-span-full flex flex-col">
           <Header artistDetail={artistDetail.data} />
-          <div>这里是ArtistDetails</div>
+          <Main songs={artistSongs.data?.songs}></Main>
         </div>
       </>
     )
