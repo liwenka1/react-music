@@ -9,7 +9,7 @@ import { SyntheticEvent } from 'react'
 interface props {
   imgUrl: string
   imgAlt: string
-  playCount: number
+  playCount?: number
   id: number
 }
 
@@ -36,10 +36,12 @@ const CoverImage: React.FC<props> = (props) => {
           onClick={(e: SyntheticEvent) => playPlaylist(e, id)}
         />
       </div>
-      <div className="play-count">
-        <SvgIcon className="w-5 h-5 inline-block mx-1" name="musical-note" />
-        <span>{useNumberFormat(playCount)}</span>
-      </div>
+      {playCount && (
+        <div className="play-count">
+          <SvgIcon className="w-5 h-5 inline-block mx-1" name="musical-note" />
+          <span>{useNumberFormat(playCount)}</span>
+        </div>
+      )}
     </div>
   )
 }

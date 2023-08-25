@@ -75,6 +75,24 @@
   @apply flex items-center justify-center cursor-pointer w-36 border rounded-full px-3 py-1;
 }
 
+.songs-item {
+  @apply grid grid-cols-12 gap-4 py-4 px-1.5 text-sm rounded-md hover:bg-secondary/80 transition-all;
+
+  .songs-icon {
+    @apply flex ml-auto text-[#888888] opacity-0;
+
+    .svg-icon {
+      @apply w-5 h-5 cursor-pointer hover:text-primary;
+    }
+  }
+
+  &:hover {
+    .songs-icon {
+      @apply opacity-100;
+    }
+  }
+}
+
 /* 整个滚动条 */
 ::-webkit-scrollbar {
   @apply w-1.5 h-1.5;

@@ -2,6 +2,7 @@ import { audio } from '@/components/Aplayer/type'
 import { useLyric } from '@/api/lyric'
 import { Song } from '@/api/song/type'
 import { PersonalizedNewSong } from '@/api/personalized/type'
+import { HotSong } from '@/api/artist/type'
 
 const getSongUrl = (id: number): string => {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
@@ -12,7 +13,7 @@ const getLyric = async (id: number): Promise<string> => {
   return res.lrc.lyric
 }
 
-export const setSong = async (audio: Song): Promise<audio> => {
+export const setSong = async (audio: Song | HotSong): Promise<audio> => {
   const lrc = await getLyric(audio.id)
   return {
     name: audio.al.name,

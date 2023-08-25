@@ -1,73 +1,111 @@
+import { Album } from '@/api/album/type'
+import { ArtistDetail, HotSong } from '@/api/artist/type'
 import { Song } from '@/api/song/type'
-import SvgIcon from '@/components/SvgIcon'
-import useAplayerStore from '@/stores/aplayer'
-import { setSong } from '@/utils/aplayer'
-import { useFormatDuring } from '@/utils/number'
-import { useNavigate } from 'react-router-dom'
+import CoverImage from '@/components/CoverImage'
+import SongsItem from '@/components/SongsItem'
+import { useState } from 'react'
 
 interface Props {
+  hotSongs: HotSong[]
+  artistDetail: ArtistDetail
   songs: Song[]
+  hotAlbums: Album[]
 }
 
 const Main: React.FC<Props> = (props) => {
-  const { songs } = props
-  const { setAudio } = useAplayerStore()
-  const playSong = async (song: Song) => {
-    const audio = await setSong(song)
-    setAudio(audio)
-  }
-
-  const navigate = useNavigate()
-  const navigateToAlbumDetails = (albumId: number) => {
-    navigate('/albumDetails', { state: { albumId } })
-  }
+  const { hotSongs, artistDetail, songs, hotAlbums } = props
+  const [artistType, setArtistType] = useState('hotSongs')
 
   return (
     <div className="col-span-full">
       <div className="my-4">
-        <span className="underline-text text-primary">歌曲{songs.length}</span>
-        <span className="underline-text text-primary mx-10">
-          专辑{songs.length}
+        <span
+          className={`mr-10 cursor-pointer ${
+            artistType == 'hotSongs' ? 'text-primary underline-text' : ''
+          }`}
+          onClick={() => setArtistType('hotSongs')}
+        >
+          精选
         </span>
-        <span className="underline-text text-primary">详情{songs.length}</span>
+        <span
+          className={`cursor-pointer ${
+            artistType == 'songs' ? 'text-primary underline-text' : ''
+          }`}
+          onClick={() => setArtistType('songs')}
+        >
+          歌曲{artistDetail.artist.musicSize}
+        </span>
+        <span
+          className={`mx-10 cursor-pointer ${
+            artistType == 'albums' ? 'text-primary underline-text' : ''
+          }`}
+          onClick={() => setArtistType('albums')}
+        >
+          专辑{artistDetail.artist.albumSize}
+        </span>
+        <span
+          className={`cursor-pointer ${
+            artistType == 'details' ? 'text-primary underline-text' : ''
+          }`}
+          onClick={() => setArtistType('details')}
+        >
+          详情
+        </span>
       </div>
-      <div>
-        <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
-          <span className="col-span-8">歌曲</span>
-          <span className="col-span-3">专辑</span>
-          <span className="col-span-1">时长</span>
+      {artistType == 'hotSongs' && (
+        <div>
+          <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
+            <span className="col-span-8">歌曲</span>
+            <span className="col-span-3">专辑</span>
+            <span className="col-span-1">时长</span>
+          </div>
+          {hotSongs.map((hotSong) => {
+            return (
+              <SongsItem song={hotSong} showArtist={false} key={hotSong.id} />
+            )
+          })}
         </div>
-        {songs.map((song) => {
-          return (
-            <div className="song-item" key={song.id}>
-              <div className="col-span-8 flex">
-                <SvgIcon
-                  name="star"
-                  className="w-5 h-5 mr-1 cursor-pointer hover:text-primary text-[#888888]"
+      )}
+      {artistType == 'songs' && (
+        <div>
+          <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
+            <span className="col-span-8">歌曲</span>
+            <span className="col-span-3">专辑</span>
+            <span className="col-span-1">时长</span>
+          </div>
+          {songs.map((song) => {
+            return <SongsItem song={song} showArtist={false} key={song.id} />
+          })}
+        </div>
+      )}
+      {artistType == 'albums' && (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
+          {hotAlbums.map((album) => {
+            return (
+              <div className="w-full h-auto cursor-pointer" key={album.id}>
+                <CoverImage
+                  imgUrl={album.picUrl}
+                  imgAlt={album.name}
+                  id={album.id}
                 />
-                <span>{song.name}</span>
-                <div className="song-icon">
-                  <SvgIcon
-                    name="play-circle"
-                    className="svg-icon mr-1"
-                    onClick={() => playSong(song)}
-                  />
-                  <SvgIcon name="plus-circle" className="svg-icon" />
-                </div>
+                <p
+                  className="hover:underline hover:underline-offset-1 line-clamp-2"
+                  title={album.name}
+                >
+                  {album.name}
+                </p>
               </div>
-              <span
-                className="col-span-3 cursor-pointer hover:text-primary"
-                onClick={() => navigateToAlbumDetails(song.al.id)}
-              >
-                {song.al.name}
-              </span>
-              <span className="col-span-1">
-                {useFormatDuring(song.dt / 1000)}
-              </span>
-            </div>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      )}
+      {artistType == 'details' && (
+        <div>
+          <span className=" text-xs font-light">
+            {artistDetail.artist.briefDesc}
+          </span>
+        </div>
+      )}
     </div>
   )
 }

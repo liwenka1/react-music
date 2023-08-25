@@ -30,22 +30,41 @@ const ArtistDetails: React.FC = () => {
       queryFn: () => useArtistAlbum(location.state.artistId)
     }
   ])
-  console.log(artists, artistAlbum)
 
-  if (artists.isLoading) {
+  if (
+    artists.isLoading ||
+    artistSongs.isLoading ||
+    artistDetail.isLoading ||
+    artistAlbum.isLoading
+  ) {
     return <Loading />
   }
 
-  if (artists.error) {
+  if (
+    artists.error ||
+    artistSongs.error ||
+    artistDetail.error ||
+    artistAlbum.error
+  ) {
     return <div>Error occurred while fetching data.</div>
   }
 
-  if (artists.isSuccess && artistSongs.isSuccess && artistDetail.isSuccess) {
+  if (
+    artists.isSuccess &&
+    artistSongs.isSuccess &&
+    artistDetail.isSuccess &&
+    artistAlbum.isSuccess
+  ) {
     return (
       <>
         <div className="col-span-full flex flex-col">
           <Header artistDetail={artistDetail.data} />
-          <Main songs={artistSongs.data?.songs}></Main>
+          <Main
+            hotSongs={artists.data.hotSongs}
+            artistDetail={artistDetail.data}
+            songs={artistSongs.data.songs}
+            hotAlbums={artistAlbum.data.hotAlbums}
+          ></Main>
         </div>
       </>
     )
