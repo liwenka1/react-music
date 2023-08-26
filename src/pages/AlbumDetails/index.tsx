@@ -1,10 +1,31 @@
+import { useAlbum } from '@/api/album'
+import { useQuery } from 'react-query'
 import { useLocation } from 'react-router-dom'
+import Header from './header'
+import Main from './main'
+import Loading from '@/components/Loading'
 
 const AlbumDetails: React.FC = () => {
   const location = useLocation()
-  console.log(location.state.albumId)
+  const { data, isSuccess, isLoading, error } = useQuery('album', () =>
+    useAlbum(location.state.albumId)
+  )
+  if (isLoading) {
+    return <Loading />
+  }
 
-  return <div>这里是AlbumDetails</div>
+  if (error) {
+    return <div>Error occurred while fetching data.</div>
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="col-span-full flex flex-col">
+        <Header album={data.album} />
+        <Main album={data.album} songs={data.songs} />
+      </div>
+    )
+  }
 }
 
 export default AlbumDetails

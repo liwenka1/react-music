@@ -9,10 +9,11 @@ import { useFormatDuring } from '@/utils/number'
 interface Props {
   song: Song | HotSong
   showArtist: boolean
+  showAlbum: boolean
 }
 
 const SongsItem: React.FC<Props> = (prpos) => {
-  const { song, showArtist } = prpos
+  const { song, showArtist, showAlbum } = prpos
 
   const { setAudio } = useAplayerStore()
   const playSong = async (song: Song | HotSong) => {
@@ -30,7 +31,11 @@ const SongsItem: React.FC<Props> = (prpos) => {
 
   return (
     <div className="songs-item" key={song.id}>
-      <div className={`flex ${showArtist ? 'col-span-5' : 'col-span-8'}`}>
+      <div
+        className={`flex ${
+          showArtist && showAlbum ? 'col-span-5' : 'col-span-8'
+        }`}
+      >
         <SvgIcon
           name="star"
           className="w-5 h-5 mr-1 cursor-pointer hover:text-primary text-[#888888]"
@@ -63,12 +68,14 @@ const SongsItem: React.FC<Props> = (prpos) => {
           })}
         </span>
       )}
-      <span
-        className="col-span-3 cursor-pointer hover:text-primary"
-        onClick={() => navigateToAlbumDetails(song.al.id)}
-      >
-        {song.al.name}
-      </span>
+      {showAlbum && (
+        <span
+          className="col-span-3 cursor-pointer hover:text-primary"
+          onClick={() => navigateToAlbumDetails(song.al.id)}
+        >
+          {song.al.name}
+        </span>
+      )}
       <span className="col-span-1">{useFormatDuring(song.dt / 1000)}</span>
     </div>
   )

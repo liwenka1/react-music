@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 const Albums: React.FC = React.memo(() => {
   const location = useLocation()
-  const [hotAlbums, setSongs] = useState([] as Album[])
+  const [hotAlbums, setHotAlbums] = useState([] as Album[])
   const limit = 12
   const [offset, setOffset] = useState(1)
   const { data, isSuccess, isLoading, refetch } = useQuery('artistAlbum', () =>
@@ -17,7 +17,7 @@ const Albums: React.FC = React.memo(() => {
   useEffect(() => {
     if (isSuccess && data) {
       if (data.hotAlbums.length < limit) setNoMore(true)
-      setSongs([...hotAlbums, ...data.hotAlbums])
+      setHotAlbums([...hotAlbums, ...data.hotAlbums])
       setOffset(offset + 1)
     }
   }, [isSuccess, data])

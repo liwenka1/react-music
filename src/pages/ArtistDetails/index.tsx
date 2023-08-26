@@ -32,16 +32,14 @@ const ArtistDetails: React.FC = () => {
 
   if (artists.isSuccess && artistDetail.isSuccess && artistDesc.isSuccess) {
     return (
-      <>
-        <div className="col-span-full flex flex-col">
-          <Header artistDetail={artistDetail.data} />
-          <Main
-            hotSongs={artists.data.hotSongs}
-            artistDetail={artistDetail.data}
-            artistDesc={artistDesc.data}
-          ></Main>
-        </div>
-      </>
+      <div className="col-span-full flex flex-col">
+        <Header artistDetail={artistDetail.data} />
+        <Main
+          hotSongs={artists.data.hotSongs}
+          artistDetail={artistDetail.data}
+          artistDesc={artistDesc.data}
+        ></Main>
+      </div>
     )
   }
 }

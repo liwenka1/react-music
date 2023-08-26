@@ -1,7 +1,6 @@
 import { PlayListDetail } from '@/api/playlist/type'
 import { Song } from '@/api/song/type'
 import SvgIcon from '@/components/SvgIcon'
-import './index.css'
 import { setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
 

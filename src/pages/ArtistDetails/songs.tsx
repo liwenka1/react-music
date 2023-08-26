@@ -23,14 +23,21 @@ const Songs: React.FC = React.memo(() => {
   }, [isSuccess, data])
 
   return (
-    <div>
+    <>
       <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
         <span className="col-span-8">歌曲</span>
         <span className="col-span-3">专辑</span>
         <span className="col-span-1">时长</span>
       </div>
       {songs.map((song) => {
-        return <SongsItem song={song} showArtist={false} key={song.id} />
+        return (
+          <SongsItem
+            song={song}
+            showArtist={false}
+            showAlbum={true}
+            key={song.id}
+          />
+        )
       })}
       {!noMore && (
         <div className="flex items-center justify-center my-5 text-primary cursor-pointer">
@@ -41,7 +48,7 @@ const Songs: React.FC = React.memo(() => {
           )}
         </div>
       )}
-    </div>
+    </>
   )
 })
 

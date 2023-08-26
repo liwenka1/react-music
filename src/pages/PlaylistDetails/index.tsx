@@ -28,15 +28,13 @@ const PlaylistDetails: React.FC = () => {
 
   if (playListDetail.isSuccess && playListTrackAll.isSuccess) {
     return (
-      <>
-        <div className="col-span-full flex flex-col">
-          <Header
-            playListDetail={playListDetail.data}
-            playListTrackAll={playListTrackAll.data}
-          />
-          <Main playListTrackAll={playListTrackAll.data} />
-        </div>
-      </>
+      <div className="col-span-full flex flex-col">
+        <Header
+          playListDetail={playListDetail.data}
+          playListTrackAll={playListTrackAll.data}
+        />
+        <Main playListTrackAll={playListTrackAll.data} />
+      </div>
     )
   }
 }

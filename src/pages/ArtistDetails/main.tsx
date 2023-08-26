@@ -50,35 +50,40 @@ const Main: React.FC<Props> = (props) => {
           详情
         </span>
       </div>
-      {artistType == 'hotSongs' && (
-        <div>
-          <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
-            <span className="col-span-8">歌曲</span>
-            <span className="col-span-3">专辑</span>
-            <span className="col-span-1">时长</span>
-          </div>
-          {hotSongs.map((hotSong) => {
-            return (
-              <SongsItem song={hotSong} showArtist={false} key={hotSong.id} />
-            )
-          })}
+      <div className={`${artistType == 'hotSongs' ? '' : 'hidden'}`}>
+        <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
+          <span className="col-span-8">歌曲</span>
+          <span className="col-span-3">专辑</span>
+          <span className="col-span-1">时长</span>
         </div>
-      )}
-      {artistType == 'songs' && <Songs />}
-      {artistType == 'albums' && <Albums />}
-      {artistType == 'details' && (
-        <div>
-          <span className="text-xs font-light">{artistDesc.briefDesc}</span>
-          {artistDesc.introduction.map((item, index) => {
-            return (
-              <div key={index}>
-                <p className="text-sm mt-4 mb-2">{item.ti}</p>
-                <span className="text-xs font-light">{item.txt}</span>
-              </div>
-            )
-          })}
-        </div>
-      )}
+        {hotSongs.map((hotSong) => {
+          return (
+            <SongsItem
+              song={hotSong}
+              showArtist={false}
+              showAlbum={true}
+              key={hotSong.id}
+            />
+          )
+        })}
+      </div>
+      <div className={`${artistType == 'songs' ? '' : 'hidden'}`}>
+        <Songs />
+      </div>
+      <div className={`${artistType == 'albums' ? '' : 'hidden'}`}>
+        <Albums />
+      </div>
+      <div className={`${artistType == 'details' ? '' : 'hidden'}`}>
+        <span className="text-xs font-light">{artistDesc.briefDesc}</span>
+        {artistDesc.introduction.map((item, index) => {
+          return (
+            <div key={index}>
+              <p className="text-sm mt-4 mb-2">{item.ti}</p>
+              <span className="text-xs font-light">{item.txt}</span>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

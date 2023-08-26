@@ -1,5 +1,4 @@
 import { Song } from '@/api/song/type'
-import './index.css'
 import SongsItem from '@/components/SongsItem'
 
 interface Props {
@@ -24,7 +23,14 @@ const Main: React.FC<Props> = (props) => {
           <span className="col-span-1">时长</span>
         </div>
         {playListTrackAll.map((song) => {
-          return <SongsItem song={song} showArtist={true} key={song.id} />
+          return (
+            <SongsItem
+              song={song}
+              showArtist={true}
+              showAlbum={true}
+              key={song.id}
+            />
+          )
         })}
       </div>
     </div>
