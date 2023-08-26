@@ -18,7 +18,7 @@ const Header: React.FC<Props> = (props) => {
       <div className="col-span-6 flex flex-col justify-between">
         <span className="text-3xl font-bold">{artistDetail.artist.name}</span>
         <span className="line-clamp-2 text-xs font-light">
-          {artistDetail.identify.imageDesc || ''}
+          {artistDetail.identify ? artistDetail.identify.imageDesc : ''}
         </span>
         <div className="flex text-xs font-light">
           <span className="mr-4">单曲数：{artistDetail.artist.musicSize}</span>

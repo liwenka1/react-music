@@ -1,9 +1,9 @@
 import http from '@/utils/request'
-import { Artist, ArtistDetail, HotSong } from './type'
+import { Artist, ArtistDesc, ArtistDetail, HotSong } from './type'
 import { Song } from '../song/type'
 import { Album } from '../album/type'
 
-// 获取歌手详情
+// 获取歌手单曲
 export const useArtists = async (id: number) => {
   const { artist, hotSongs } = await http.get<{
     artist: Artist
@@ -48,4 +48,9 @@ export const useArtistAlbum = async (
     limit: limit,
     offset: offset
   })
+}
+
+// 获取歌手描述
+export const useArtistDesc = async (id: number) => {
+  return await http.get<ArtistDesc>('/artist/desc', { id: id })
 }

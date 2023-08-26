@@ -1,19 +1,17 @@
-import { Album } from '@/api/album/type'
-import { ArtistDetail, HotSong } from '@/api/artist/type'
-import { Song } from '@/api/song/type'
-import CoverImage from '@/components/CoverImage'
+import { ArtistDesc, ArtistDetail, HotSong } from '@/api/artist/type'
 import SongsItem from '@/components/SongsItem'
 import { useState } from 'react'
+import Songs from './songs'
+import Albums from './albums'
 
 interface Props {
   hotSongs: HotSong[]
   artistDetail: ArtistDetail
-  songs: Song[]
-  hotAlbums: Album[]
+  artistDesc: ArtistDesc
 }
 
 const Main: React.FC<Props> = (props) => {
-  const { hotSongs, artistDetail, songs, hotAlbums } = props
+  const { hotSongs, artistDetail, artistDesc } = props
   const [artistType, setArtistType] = useState('hotSongs')
 
   return (
@@ -66,44 +64,19 @@ const Main: React.FC<Props> = (props) => {
           })}
         </div>
       )}
-      {artistType == 'songs' && (
+      {artistType == 'songs' && <Songs />}
+      {artistType == 'albums' && <Albums />}
+      {artistType == 'details' && (
         <div>
-          <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
-            <span className="col-span-8">歌曲</span>
-            <span className="col-span-3">专辑</span>
-            <span className="col-span-1">时长</span>
-          </div>
-          {songs.map((song) => {
-            return <SongsItem song={song} showArtist={false} key={song.id} />
-          })}
-        </div>
-      )}
-      {artistType == 'albums' && (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
-          {hotAlbums.map((album) => {
+          <span className="text-xs font-light">{artistDesc.briefDesc}</span>
+          {artistDesc.introduction.map((item, index) => {
             return (
-              <div className="w-full h-auto cursor-pointer" key={album.id}>
-                <CoverImage
-                  imgUrl={album.picUrl}
-                  imgAlt={album.name}
-                  id={album.id}
-                />
-                <p
-                  className="hover:underline hover:underline-offset-1 line-clamp-2"
-                  title={album.name}
-                >
-                  {album.name}
-                </p>
+              <div key={index}>
+                <p className="text-sm mt-4 mb-2">{item.ti}</p>
+                <span className="text-xs font-light">{item.txt}</span>
               </div>
             )
           })}
-        </div>
-      )}
-      {artistType == 'details' && (
-        <div>
-          <span className=" text-xs font-light">
-            {artistDetail.artist.briefDesc}
-          </span>
         </div>
       )}
     </div>
