@@ -2,6 +2,7 @@ import { Album } from '@/api/album/type'
 import { Song } from '@/api/song/type'
 import SongsItem from '@/components/SongsItem'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface SongsProps {
   songs: Song[]
@@ -37,6 +38,10 @@ interface InfoProps {
 
 const Info: React.FC<InfoProps> = (props) => {
   const { album } = props
+  const navigate = useNavigate()
+  const navigateToArtistDetails = (artistId: number) => {
+    navigate('/artistDetails', { state: { artistId } })
+  }
 
   return (
     <>
@@ -46,14 +51,19 @@ const Info: React.FC<InfoProps> = (props) => {
       </div>
       <div className="flex mt-8">
         <span className="text-sm whitespace-nowrap w-20">歌手:</span>
-        <span className="text-sm flex-1 cursor-pointer hover:text-primary">
+        <span
+          className="text-sm flex-1 cursor-pointer hover:text-primary"
+          onClick={() => navigateToArtistDetails(album.artist.id)}
+        >
           {album.artist.name}
         </span>
       </div>
-      <div className="flex mt-8">
-        <span className="text-sm whitespace-nowrap w-20">唱片公司:</span>
-        <span className="text-sm font-light flex-1">{album.company}</span>
-      </div>
+      {album.company && (
+        <div className="flex mt-8">
+          <span className="text-sm whitespace-nowrap w-20">唱片公司:</span>
+          <span className="text-sm font-light flex-1">{album.company}</span>
+        </div>
+      )}
       {album.description && (
         <div className="flex mt-8">
           <span className="text-sm whitespace-nowrap w-20">专辑简介:</span>

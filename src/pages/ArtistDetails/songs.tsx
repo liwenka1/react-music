@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { useLocation } from 'react-router-dom'
 
-const Songs: React.FC = React.memo(() => {
+const Songs: React.FC = () => {
   const location = useLocation()
   const [songs, setSongs] = useState([] as Song[])
   const limit = 20
@@ -50,7 +50,6 @@ const Songs: React.FC = React.memo(() => {
       )}
     </>
   )
-})
+}
 
-Songs.displayName = 'Songs'
 export default Songs

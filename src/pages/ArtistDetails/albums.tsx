@@ -3,9 +3,9 @@ import { useArtistAlbum } from '@/api/artist'
 import CoverImage from '@/components/CoverImage'
 import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-const Albums: React.FC = React.memo(() => {
+const Albums: React.FC = () => {
   const location = useLocation()
   const [hotAlbums, setHotAlbums] = useState([] as Album[])
   const limit = 12
@@ -21,13 +21,21 @@ const Albums: React.FC = React.memo(() => {
       setOffset(offset + 1)
     }
   }, [isSuccess, data])
+  const navigate = useNavigate()
+  const navigateToAlbumDetails = (albumId: number) => {
+    navigate('/albumDetails', { state: { albumId } })
+  }
 
   return (
     <>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
         {hotAlbums.map((album) => {
           return (
-            <div className="w-full h-auto cursor-pointer" key={album.id}>
+            <div
+              className="w-full h-auto cursor-pointer"
+              key={album.id}
+              onClick={() => navigateToAlbumDetails(album.id)}
+            >
               <CoverImage
                 imgUrl={album.picUrl}
                 imgAlt={album.name}
@@ -54,7 +62,6 @@ const Albums: React.FC = React.memo(() => {
       )}
     </>
   )
-})
+}
 
-Albums.displayName = 'Albums'
 export default Albums

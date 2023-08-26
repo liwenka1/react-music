@@ -1,5 +1,6 @@
 import { Album } from '@/api/album/type'
 import SvgIcon from '@/components/SvgIcon'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   album: Album
@@ -7,6 +8,10 @@ interface Props {
 
 const Header: React.FC<Props> = (props) => {
   const { album } = props
+  const navigate = useNavigate()
+  const navigateToArtistDetails = (artistId: number) => {
+    navigate('/artistDetails', { state: { artistId } })
+  }
 
   return (
     <div className="grid grid-cols-7 gap-4">
@@ -18,7 +23,10 @@ const Header: React.FC<Props> = (props) => {
       <div className="col-span-6 flex flex-col justify-between">
         <div>
           <h1 className="text-3xl font-bold my-2">{album.name}</h1>
-          <span className="text-xs cursor-pointer hover:text-primary">
+          <span
+            className="text-xs cursor-pointer hover:text-primary"
+            onClick={() => navigateToArtistDetails(album.artist.id)}
+          >
             {album.artist.name}
           </span>
         </div>

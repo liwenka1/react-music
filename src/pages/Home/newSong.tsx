@@ -10,8 +10,8 @@ interface Props {
 
 const NewSong: React.FC<Props> = (props) => {
   const navigate = useNavigate()
-  const navigateToArtistDetails = () => {
-    navigate('/artistDetails')
+  const navigateToArtistDetails = (artistId: number) => {
+    navigate('/artistDetails', { state: { artistId } })
   }
 
   const { setAudio } = useAplayerStore()
@@ -42,14 +42,23 @@ const NewSong: React.FC<Props> = (props) => {
                 <p className="line-clamp-1" title={item.name}>
                   {item.name}
                 </p>
-                <p
-                  className="hover:underline hover:underline-offset-1 font-extralight line-clamp-1 cursor-pointer"
-                  title={item.song.artists
-                    .map((artist) => artist.name)
-                    .join('/')}
-                  onClick={navigateToArtistDetails}
-                >
-                  {item.song.artists.map((artist) => artist.name).join('/')}
+                <p className="flex">
+                  {item.song.artists.map((artist, index) => {
+                    return (
+                      <>
+                        <span
+                          className="hover:underline hover:underline-offset-1 font-extralight line-clamp-1 cursor-pointer"
+                          title={artist.name}
+                          onClick={() => navigateToArtistDetails(artist.id)}
+                        >
+                          {artist.name}
+                        </span>
+                        {index != item.song.artists.length - 1 && (
+                          <span>/</span>
+                        )}
+                      </>
+                    )
+                  })}
                 </p>
               </div>
               <div className="flex ml-auto mr-2">
