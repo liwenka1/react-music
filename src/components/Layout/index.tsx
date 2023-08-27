@@ -1,9 +1,17 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Nav from '@/components/Nav'
 import Sidebar from '@/components/Sidebar'
 import Aplayer from '@/components/Aplayer'
+import { useEffect } from 'react'
 
 const Layout: React.FC = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    const element = document.querySelector('.main-container')
+    element?.scrollTo(0, 0)
+  }, [location])
+
   return (
     <div className="flex flex-row h-screen">
       <Sidebar />
