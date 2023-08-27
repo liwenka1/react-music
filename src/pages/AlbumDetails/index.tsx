@@ -7,8 +7,9 @@ import Loading from '@/components/Loading'
 
 const AlbumDetails: React.FC = () => {
   const location = useLocation()
-  const { data, isSuccess, isLoading, error } = useQuery('album', () =>
-    useAlbum(location.state.albumId)
+  const { data, isSuccess, isLoading, error } = useQuery(
+    ['album', location.state.albumId],
+    () => useAlbum(location.state.albumId)
   )
   if (isLoading) {
     return <Loading />

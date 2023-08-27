@@ -9,11 +9,11 @@ const PlaylistDetails: React.FC = () => {
   const location = useLocation()
   const [playListDetail, playListTrackAll] = useQueries([
     {
-      queryKey: 'playListDetail',
+      queryKey: ['playListDetail', location.state.playlistId],
       queryFn: () => usePlayListDetail(location.state.playlistId)
     },
     {
-      queryKey: 'playListTrackAll',
+      queryKey: ['playListTrackAll', location.state.playlistId],
       queryFn: () => usePlayListTrackAll(location.state.playlistId)
     }
   ])

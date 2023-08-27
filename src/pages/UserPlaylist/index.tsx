@@ -12,8 +12,9 @@ const UserPlaylist: React.FC = () => {
     navigate('/playlistDetails', { state: { playlistId } })
   }
   const limit = 35
-  const { data, isSuccess, isLoading, error } = useQuery('userPlaylist', () =>
-    useUserPlaylist(location.state.userId, limit)
+  const { data, isSuccess, isLoading, error } = useQuery(
+    ['userPlaylist', location.state.userId],
+    () => useUserPlaylist(location.state.userId, limit)
   )
 
   if (isLoading) {
