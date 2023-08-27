@@ -2,25 +2,45 @@ import { useArtistSongs } from '@/api/artist'
 import { Song } from '@/api/song/type'
 import SongsItem from '@/components/SongsItem'
 import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { useLocation } from 'react-router-dom'
 
-const Songs: React.FC = () => {
+interface Props {
+  musicSize: number
+}
+
+const Songs: React.FC<Props> = (props) => {
+  const { musicSize } = props
   const location = useLocation()
   const [songs, setSongs] = useState([] as Song[])
   const limit = 20
   const [offset, setOffset] = useState(1)
-  const { data, isSuccess, isLoading, refetch } = useQuery('artistSongs', () =>
-    useArtistSongs(location.state.artistId, 'time', limit, (offset - 1) * limit)
+  const { data, isSuccess, isLoading, refetch } = useQuery(
+    ['artistSongs', location.state.artistId, offset],
+    () =>
+      useArtistSongs(
+        location.state.artistId,
+        'time',
+        limit,
+        (offset - 1) * limit
+      ),
+    { staleTime: Infinity }
   )
-  const [noMore, setNoMore] = useState(false)
+  const queryClient = useQueryClient()
   useEffect(() => {
-    if (isSuccess && data) {
-      if (data.songs.length < limit) setNoMore(true)
-      setSongs([...songs, ...data.songs])
-      setOffset(offset + 1)
-    }
-  }, [isSuccess, data])
+    refetch().then(() => {
+      if (isSuccess && data) {
+        setSongs([...songs, ...data.songs])
+      } else {
+        const cachedData = queryClient.getQueryData([
+          'artistSongs',
+          location.state.artistId,
+          offset
+        ]) as { songs: Song[] }
+        setSongs([...songs, ...cachedData.songs])
+      }
+    })
+  }, [offset])
 
   return (
     <>
@@ -39,12 +59,12 @@ const Songs: React.FC = () => {
           />
         )
       })}
-      {!noMore && (
+      {musicSize > songs.length && (
         <div className="flex items-center justify-center my-5 text-primary cursor-pointer">
           {isLoading ? (
             <span>加载中。。。</span>
           ) : (
-            <span onClick={() => refetch()}>加载更多</span>
+            <span onClick={() => setOffset(offset + 1)}>加载更多</span>
           )}
         </div>
       )}

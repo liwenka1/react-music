@@ -10,15 +10,18 @@ const ArtistDetails: React.FC = () => {
   const [artists, artistDetail, artistDesc] = useQueries([
     {
       queryKey: ['artists', location.state.artistId],
-      queryFn: () => useArtists(location.state.artistId)
+      queryFn: () => useArtists(location.state.artistId),
+      staleTime: Infinity
     },
     {
       queryKey: ['artistDetail', location.state.artistId],
-      queryFn: () => useArtistDetail(location.state.artistId)
+      queryFn: () => useArtistDetail(location.state.artistId),
+      staleTime: Infinity
     },
     {
       queryKey: ['artistDesc', location.state.artistId],
-      queryFn: () => useArtistDesc(location.state.artistId)
+      queryFn: () => useArtistDesc(location.state.artistId),
+      staleTime: Infinity
     }
   ])
 

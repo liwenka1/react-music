@@ -2,25 +2,39 @@ import { Album } from '@/api/album/type'
 import { useArtistAlbum } from '@/api/artist'
 import CoverImage from '@/components/CoverImage'
 import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const Albums: React.FC = () => {
+interface Props {
+  albumSize: number
+}
+
+const Albums: React.FC<Props> = (props) => {
+  const { albumSize } = props
   const location = useLocation()
   const [hotAlbums, setHotAlbums] = useState([] as Album[])
   const limit = 12
   const [offset, setOffset] = useState(1)
-  const { data, isSuccess, isLoading, refetch } = useQuery('artistAlbum', () =>
-    useArtistAlbum(location.state.artistId, limit, (offset - 1) * limit)
+  const { data, isSuccess, isLoading, refetch } = useQuery(
+    ['artistAlbum', location.state.artistId, offset],
+    () => useArtistAlbum(location.state.artistId, limit, (offset - 1) * limit),
+    { staleTime: Infinity }
   )
-  const [noMore, setNoMore] = useState(false)
+  const queryClient = useQueryClient()
   useEffect(() => {
-    if (isSuccess && data) {
-      if (data.hotAlbums.length < limit) setNoMore(true)
-      setHotAlbums([...hotAlbums, ...data.hotAlbums])
-      setOffset(offset + 1)
-    }
-  }, [isSuccess, data])
+    refetch().then(() => {
+      if (isSuccess && data) {
+        setHotAlbums([...hotAlbums, ...data.hotAlbums])
+      } else {
+        const cachedData = queryClient.getQueryData([
+          'artistAlbum',
+          location.state.artistId,
+          offset
+        ]) as { hotAlbums: Album[] }
+        setHotAlbums([...hotAlbums, ...cachedData.hotAlbums])
+      }
+    })
+  }, [offset])
   const navigate = useNavigate()
   const navigateToAlbumDetails = (albumId: number) => {
     navigate('/albumDetails', { state: { albumId } })
@@ -51,12 +65,12 @@ const Albums: React.FC = () => {
           )
         })}
       </div>
-      {!noMore && (
+      {albumSize > hotAlbums.length && (
         <div className="flex items-center justify-center my-5 text-primary cursor-pointer">
           {isLoading ? (
             <span>加载中。。。</span>
           ) : (
-            <span onClick={() => refetch()}>加载更多</span>
+            <span onClick={() => setOffset(offset + 1)}>加载更多</span>
           )}
         </div>
       )}

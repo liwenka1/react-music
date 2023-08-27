@@ -8,14 +8,16 @@ import Loading from '@/components/Loading'
 
 const Home: React.FC = () => {
   const [banner, personalized, personalizedNewSong] = useQueries([
-    { queryKey: 'banner', queryFn: () => useBanner() },
+    { queryKey: 'banner', queryFn: () => useBanner(), staleTime: Infinity },
     {
       queryKey: 'personalized',
-      queryFn: () => usePersonalized(12)
+      queryFn: () => usePersonalized(12),
+      staleTime: Infinity
     },
     {
       queryKey: 'personalizedNewSong',
-      queryFn: () => usePersonalizedNewSong()
+      queryFn: () => usePersonalizedNewSong(),
+      staleTime: Infinity
     }
   ])
 

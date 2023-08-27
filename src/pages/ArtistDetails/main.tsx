@@ -68,10 +68,10 @@ const Main: React.FC<Props> = (props) => {
         })}
       </div>
       <div className={`${artistType == 'songs' ? '' : 'hidden'}`}>
-        <Songs />
+        <Songs musicSize={artistDetail.artist.musicSize} />
       </div>
       <div className={`${artistType == 'albums' ? '' : 'hidden'}`}>
-        <Albums />
+        <Albums albumSize={artistDetail.artist.albumSize} />
       </div>
       <div className={`${artistType == 'details' ? '' : 'hidden'}`}>
         <span className="text-xs font-light">{artistDesc.briefDesc}</span>
