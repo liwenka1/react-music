@@ -3,6 +3,7 @@ import { Song } from '@/api/song/type'
 import SvgIcon from '@/components/SvgIcon'
 import { setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   playListDetail: PlayListDetail
@@ -17,6 +18,11 @@ const Header: React.FC<Props> = (props) => {
     for (const audio of playListTrackAll) {
       setAudio(await setSong(audio))
     }
+  }
+
+  const navigate = useNavigate()
+  const navigateToUserPlaylist = (userId: number) => {
+    navigate('/userPlaylist', { state: { userId } })
   }
 
   return (
@@ -35,7 +41,12 @@ const Header: React.FC<Props> = (props) => {
               src={playListDetail.creator.avatarUrl}
               alt=""
             />
-            <span className="text-sm mx-2 cursor-pointer hover:text-primary">
+            <span
+              className="text-sm mx-2 cursor-pointer hover:text-primary"
+              onClick={() =>
+                navigateToUserPlaylist(playListDetail.creator.userId)
+              }
+            >
               {playListDetail.creator.nickname}
             </span>
             {playListDetail.tags.map((tag, index) => {

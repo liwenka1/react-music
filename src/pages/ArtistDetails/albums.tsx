@@ -28,7 +28,7 @@ const Albums: React.FC = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
+      <div className="grid gap-4 grid-cols-6 mt-12">
         {hotAlbums.map((album) => {
           return (
             <div
