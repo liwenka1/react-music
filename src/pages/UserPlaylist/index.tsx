@@ -72,6 +72,7 @@ const UserPlaylist: React.FC = () => {
                     imgUrl={item.coverImgUrl}
                     imgAlt={item.name}
                     id={item.id}
+                    type="playlist"
                   />
                   <p
                     className="hover:underline hover:underline-offset-1 line-clamp-2"

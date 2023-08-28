@@ -54,6 +54,7 @@ const Albums: React.FC<Props> = (props) => {
                 imgUrl={album.picUrl}
                 imgAlt={album.name}
                 id={album.id}
+                type="album"
               />
               <p
                 className="hover:underline hover:underline-offset-1 line-clamp-2"

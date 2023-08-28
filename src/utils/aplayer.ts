@@ -16,7 +16,7 @@ const getLyric = async (id: number): Promise<string> => {
 export const setSong = async (audio: Song | HotSong): Promise<audio> => {
   const lrc = await getLyric(audio.id)
   return {
-    name: audio.al.name,
+    name: audio.name,
     artist: audio.ar.map((artist) => artist.name).join('/'),
     url: getSongUrl(audio.id),
     cover: audio.al.picUrl,

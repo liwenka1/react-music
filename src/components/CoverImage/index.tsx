@@ -7,22 +7,27 @@ import useAplayerStore from '@/stores/aplayer'
 import { SyntheticEvent } from 'react'
 import loadingImgUrl from '@/assets/img/loading.png'
 import LazyImg from 'react-lazyimg-component'
+import { useAlbum } from '@/api/album'
 
 interface props {
   imgUrl: string
   imgAlt: string
   playCount?: number
   id: number
+  type: string
 }
 
 const CoverImage: React.FC<props> = (props) => {
-  const { imgUrl, imgAlt, playCount, id } = props
+  const { imgUrl, imgAlt, playCount, id, type } = props
 
   const { ap, setAudio } = useAplayerStore()
-  const playPlaylist = async (e: SyntheticEvent, id: number) => {
+  const play = async (e: SyntheticEvent, id: number) => {
     e.stopPropagation()
     e.nativeEvent.stopImmediatePropagation()
-    const audioList = await usePlayListTrackAll(id)
+    const audioList =
+      type == 'playlist'
+        ? await usePlayListTrackAll(id)
+        : (await useAlbum(id)).songs
     ap?.list.clear()
     for (const audio of audioList) {
       setAudio(await setSong(audio))
@@ -41,7 +46,7 @@ const CoverImage: React.FC<props> = (props) => {
         <SvgIcon
           className="w-10 text-white play-icon opacity-0 transition-opacity hover:text-primary"
           name="play-circle"
-          onClick={(e: SyntheticEvent) => playPlaylist(e, id)}
+          onClick={(e: SyntheticEvent) => play(e, id)}
         />
       </div>
       {playCount && (

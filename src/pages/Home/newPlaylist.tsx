@@ -32,6 +32,7 @@ const NewPlaylist: React.FC<Props> = (props) => {
                 imgAlt={item.name}
                 playCount={item.playCount}
                 id={item.id}
+                type="playlist"
               />
               <p
                 className="hover:underline hover:underline-offset-1 line-clamp-2"

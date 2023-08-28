@@ -3,6 +3,8 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './index.css'
 import { Banner } from '@/api/banner/type'
+import bannerLoadingImgUrl from '@/assets/img/bannerLoading.png'
+import LazyImg from 'react-lazyimg-component'
 
 interface Props {
   banner: Banner[]
@@ -24,9 +26,10 @@ const SimpleSlider: React.FC<Props> = (props) => {
       <Slider {...settings}>
         {props.banner.map((item) => (
           <div key={item.bannerId} className="outline-0 px-2">
-            <img
+            <LazyImg
               src={item.pic}
               alt={item.typeTitle}
+              placeholder={bannerLoadingImgUrl}
               className="w-full h-auto rounded-md cursor-pointer"
             />
           </div>
