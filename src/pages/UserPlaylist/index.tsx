@@ -4,6 +4,8 @@ import Loading from '@/components/Loading'
 import SvgIcon from '@/components/SvgIcon'
 import { useQuery } from 'react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
+import avatarLoadingImgUrl from '@/assets/img/avatarLoading.png'
+import LazyImg from 'react-lazyimg-component'
 
 const UserPlaylist: React.FC = () => {
   const location = useLocation()
@@ -29,10 +31,11 @@ const UserPlaylist: React.FC = () => {
     return (
       <div className="col-span-full flex flex-col">
         <div className="col-span-full grid grid-cols-7 gap-4">
-          <img
+          <LazyImg
             className="w-full rounded-full col-span-1"
             src={data.playlist[0].creator.avatarUrl}
             alt={data.playlist[0].creator.nickname}
+            placeholder={avatarLoadingImgUrl}
           />
           <div className="col-span-6 flex flex-col justify-between">
             <div>

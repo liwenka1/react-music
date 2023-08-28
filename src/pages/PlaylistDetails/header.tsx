@@ -4,6 +4,8 @@ import SvgIcon from '@/components/SvgIcon'
 import { setSong } from '@/utils/aplayer'
 import useAplayerStore from '@/stores/aplayer'
 import { useNavigate } from 'react-router-dom'
+import avatarLoadingImgUrl from '@/assets/img/avatarLoading.png'
+import LazyImg from 'react-lazyimg-component'
 
 interface Props {
   playListDetail: PlayListDetail
@@ -27,19 +29,21 @@ const Header: React.FC<Props> = (props) => {
 
   return (
     <div className="grid grid-cols-7 gap-4">
-      <img
+      <LazyImg
         className="w-full rounded-md col-span-1"
         src={playListDetail.coverImgUrl}
         alt={playListDetail.name}
+        placeholder={avatarLoadingImgUrl}
       />
       <div className="col-span-6 flex flex-col justify-between">
         <div>
           <h1 className="text-3xl font-bold my-2">{playListDetail.name}</h1>
           <div className="flex flex-row my-2 items-center">
-            <img
+            <LazyImg
               className="w-6 rounded-full"
               src={playListDetail.creator.avatarUrl}
               alt=""
+              placeholder={avatarLoadingImgUrl}
             />
             <span
               className="text-sm mx-2 cursor-pointer hover:text-primary"

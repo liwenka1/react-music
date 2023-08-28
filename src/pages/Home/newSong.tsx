@@ -3,6 +3,8 @@ import SvgIcon from '@/components/SvgIcon'
 import { setNewSong } from '@/utils/aplayer'
 import { useNavigate } from 'react-router-dom'
 import useAplayerStore from '@/stores/aplayer'
+import loadingImgUrl from '@/assets/img/loading.png'
+import LazyImg from 'react-lazyimg-component'
 
 interface Props {
   personalizedNewSong: PersonalizedNewSong[]
@@ -33,9 +35,10 @@ const NewSong: React.FC<Props> = (props) => {
               className="w-full h-auto flex items-center rounded-md hover:bg-secondary/80 transition-all"
               key={item.id}
             >
-              <img
+              <LazyImg
                 src={item.picUrl}
                 alt={item.name}
+                placeholder={loadingImgUrl}
                 className="rounded-md w-1/12 h-auto mr-4"
               />
               <div>

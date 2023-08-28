@@ -1,6 +1,8 @@
 import { Album } from '@/api/album/type'
 import SvgIcon from '@/components/SvgIcon'
 import { useNavigate } from 'react-router-dom'
+import avatarLoadingImgUrl from '@/assets/img/avatarLoading.png'
+import LazyImg from 'react-lazyimg-component'
 
 interface Props {
   album: Album
@@ -15,10 +17,11 @@ const Header: React.FC<Props> = (props) => {
 
   return (
     <div className="grid grid-cols-7 gap-4">
-      <img
+      <LazyImg
         className="w-full rounded-md col-span-1"
         src={album.picUrl}
         alt={album.name}
+        placeholder={avatarLoadingImgUrl}
       />
       <div className="col-span-6 flex flex-col justify-between">
         <div>

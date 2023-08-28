@@ -1,5 +1,7 @@
 import { ArtistDetail } from '@/api/artist/type'
 import SvgIcon from '@/components/SvgIcon'
+import avatarLoadingImgUrl from '@/assets/img/avatarLoading.png'
+import LazyImg from 'react-lazyimg-component'
 
 interface Props {
   artistDetail: ArtistDetail
@@ -10,10 +12,11 @@ const Header: React.FC<Props> = (props) => {
 
   return (
     <div className="grid grid-cols-7 gap-4">
-      <img
+      <LazyImg
         className="w-full rounded-full col-span-1"
         src={artistDetail.artist.avatar}
         alt={artistDetail.artist.name}
+        placeholder={avatarLoadingImgUrl}
       />
       <div className="col-span-6 flex flex-col justify-between">
         <span className="text-3xl font-bold">{artistDetail.artist.name}</span>
