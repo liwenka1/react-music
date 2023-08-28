@@ -4,8 +4,9 @@ import './index.css'
 import { setSong } from '@/utils/aplayer'
 import { usePlayListTrackAll } from '@/api/playlist'
 import useAplayerStore from '@/stores/aplayer'
-import { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent } from 'react'
 import loadingImgUrl from '@/assets/img/loading.png'
+import LazyImg from 'react-lazyimg-component'
 
 interface props {
   imgUrl: string
@@ -27,19 +28,14 @@ const CoverImage: React.FC<props> = (props) => {
       setAudio(await setSong(audio))
     }
   }
-  const [isLoading, setIsLoading] = useState(true)
 
   return (
     <div className="cover-image">
-      {isLoading && (
-        <img src={loadingImgUrl} alt="Loading..." className="rounded-md" />
-      )}
-      <img
+      <LazyImg
         src={imgUrl}
         alt={imgAlt}
+        placeholder={loadingImgUrl}
         className="rounded-md"
-        onLoad={() => setIsLoading(false)}
-        onError={() => setIsLoading(false)}
       />
       <div className="mask flex justify-center items-center">
         <SvgIcon
