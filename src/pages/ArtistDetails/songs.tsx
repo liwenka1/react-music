@@ -1,6 +1,9 @@
 import { useArtistSongs } from '@/api/artist'
 import { Song } from '@/api/song/type'
 import SongsItem from '@/components/SongsItem'
+import SvgIcon from '@/components/SvgIcon'
+import useAplayerStore from '@/stores/aplayer'
+import { setSong } from '@/utils/aplayer'
 import React, { useEffect, useState } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { useLocation } from 'react-router-dom'
@@ -42,8 +45,20 @@ const Songs: React.FC<Props> = (props) => {
     })
   }, [offset])
 
+  const { ap, setAudio } = useAplayerStore()
+  const playSongs = async () => {
+    ap?.list.clear()
+    for (const audio of songs) {
+      setAudio(await setSong(audio))
+    }
+  }
+
   return (
     <>
+      <span className="svg-button mt-8" onClick={playSongs}>
+        <SvgIcon name="play" className="w-5 h-5 mr-1" />
+        <span>播放全部</span>
+      </span>
       <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
         <span className="col-span-8">歌曲</span>
         <span className="col-span-3">专辑</span>

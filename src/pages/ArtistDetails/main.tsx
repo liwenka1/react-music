@@ -3,6 +3,9 @@ import SongsItem from '@/components/SongsItem'
 import { useState } from 'react'
 import Songs from './songs'
 import Albums from './albums'
+import SvgIcon from '@/components/SvgIcon'
+import useAplayerStore from '@/stores/aplayer'
+import { setSong } from '@/utils/aplayer'
 
 interface Props {
   hotSongs: HotSong[]
@@ -13,6 +16,13 @@ interface Props {
 const Main: React.FC<Props> = (props) => {
   const { hotSongs, artistDetail, artistDesc } = props
   const [artistType, setArtistType] = useState('hotSongs')
+  const { ap, setAudio } = useAplayerStore()
+  const playHotSongs = async () => {
+    ap?.list.clear()
+    for (const audio of hotSongs) {
+      setAudio(await setSong(audio))
+    }
+  }
 
   return (
     <div className="col-span-full">
@@ -51,6 +61,10 @@ const Main: React.FC<Props> = (props) => {
         </span>
       </div>
       <div className={`${artistType == 'hotSongs' ? '' : 'hidden'}`}>
+        <span className="svg-button mt-8" onClick={playHotSongs}>
+          <SvgIcon name="play" className="w-5 h-5 mr-1" />
+          <span>播放全部</span>
+        </span>
         <div className="grid grid-cols-12 gap-4 mt-8 mb-1 text-xs font-light">
           <span className="col-span-8">歌曲</span>
           <span className="col-span-3">专辑</span>

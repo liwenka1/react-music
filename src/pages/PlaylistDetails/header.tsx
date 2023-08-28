@@ -65,12 +65,9 @@ const Header: React.FC<Props> = (props) => {
             {playListDetail.description}
           </p>
         </div>
-        <div className="flex mb-2">
-          <span
-            className="svg-button bg-primary text-white mr-2"
-            onClick={playPlaylist}
-          >
-            <SvgIcon name="play-circle" className="w-5 h-5 mr-1" />
+        <div className="flex mb-2" onClick={playPlaylist}>
+          <span className="svg-button bg-primary text-white mr-2">
+            <SvgIcon name="play" className="w-5 h-5 mr-1" />
             <span>播放全部</span>
           </span>
           <span className="svg-button">
