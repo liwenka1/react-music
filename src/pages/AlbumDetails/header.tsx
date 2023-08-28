@@ -3,16 +3,27 @@ import SvgIcon from '@/components/SvgIcon'
 import { useNavigate } from 'react-router-dom'
 import avatarLoadingImgUrl from '@/assets/img/avatarLoading.png'
 import LazyImg from 'react-lazyimg-component'
+import { Song } from '@/api/song/type'
+import { setSong } from '@/utils/aplayer'
+import useAplayerStore from '@/stores/aplayer'
 
 interface Props {
   album: Album
+  songs: Song[]
 }
 
 const Header: React.FC<Props> = (props) => {
-  const { album } = props
+  const { album, songs } = props
   const navigate = useNavigate()
   const navigateToArtistDetails = (artistId: number) => {
     navigate('/artistDetails', { state: { artistId } })
+  }
+  const { ap, setAudio } = useAplayerStore()
+  const playAlbumSongs = async () => {
+    ap?.list.clear()
+    for (const audio of songs) {
+      setAudio(await setSong(audio))
+    }
   }
 
   return (
@@ -41,7 +52,11 @@ const Header: React.FC<Props> = (props) => {
         </div>
         <div className="flex mb-2">
           <span className="svg-button bg-primary text-white mr-2">
-            <SvgIcon name="play-circle" className="w-5 h-5 mr-1" />
+            <SvgIcon
+              name="play-circle"
+              className="w-5 h-5 mr-1"
+              onClick={playAlbumSongs}
+            />
             <span>播放全部</span>
           </span>
           <span className="svg-button">
