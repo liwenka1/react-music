@@ -43,7 +43,7 @@ const SongsItem: React.FC<Props> = (prpos) => {
         }`}
       >
         <SvgIcon
-          name="star"
+          name="heart"
           className="w-5 h-5 mr-1 cursor-pointer hover:text-primary text-[#888888]"
         />
         <span>{song.name}</span>

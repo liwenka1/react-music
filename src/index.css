@@ -80,10 +80,6 @@
 
   .songs-icon {
     @apply flex ml-auto text-[#888888] opacity-0;
-
-    .svg-icon {
-      @apply w-5 h-5 cursor-pointer hover:text-primary;
-    }
   }
 
   &:hover {
@@ -91,6 +87,10 @@
       @apply opacity-100;
     }
   }
+}
+
+.svg-icon {
+  @apply w-5 h-5 cursor-pointer hover:text-primary;
 }
 
 .underline-text {

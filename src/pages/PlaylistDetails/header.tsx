@@ -71,7 +71,7 @@ const Header: React.FC<Props> = (props) => {
             <span>播放全部</span>
           </span>
           <span className="svg-button">
-            <SvgIcon name="star" className="w-5 h-5 mr-1" />
+            <SvgIcon name="heart" className="w-5 h-5 mr-1" />
             <span>收藏</span>
           </span>
         </div>

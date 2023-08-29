@@ -73,18 +73,15 @@ const NewSong: React.FC<Props> = (props) => {
               <div className="flex ml-auto mr-2">
                 <SvgIcon
                   name="play-circle"
-                  className="w-5 h-5 cursor-pointer hover:text-primary mr-1"
+                  className="svg-icon mr-1"
                   onClick={() => playNewSong(item)}
                 />
                 <SvgIcon
                   name="plus-circle"
-                  className="w-5 h-5 cursor-pointer hover:text-primary mr-1"
+                  className="svg-icon mr-1"
                   onClick={() => addNewSong(item)}
                 />
-                <SvgIcon
-                  name="star"
-                  className="w-5 h-5 cursor-pointer hover:text-primary "
-                />
+                <SvgIcon name="heart" className="svg-icon " />
               </div>
             </div>
           )

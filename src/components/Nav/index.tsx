@@ -20,12 +20,12 @@ const Nav: React.FC = () => {
         <div className="flex">
           <SvgIcon
             name="chevron-left"
-            className="w-5 h-5 cursor-pointer hover:text-primary mr-2"
+            className="svg-icon mr-2"
             onClick={handleGoPrevious}
           />
           <SvgIcon
             name="chevron-right"
-            className="w-5 h-5 cursor-pointer hover:text-primary"
+            className="svg-icon"
             onClick={handleGoNext}
           />
         </div>
