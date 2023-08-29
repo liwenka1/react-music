@@ -16,9 +16,15 @@ const NewSong: React.FC<Props> = (props) => {
     navigate('/artistDetails', { state: { artistId } })
   }
 
-  const { setAudio } = useAplayerStore()
+  const { ap, setAudio } = useAplayerStore()
   const playNewSong = async (newSong: PersonalizedNewSong) => {
     const audio = await setNewSong(newSong)
+    setAudio(audio)
+    ap?.list.switch(ap?.list.audios.length - 1)
+    ap?.play()
+  }
+  const addNewSong = async (song: PersonalizedNewSong) => {
+    const audio = await setNewSong(song)
     setAudio(audio)
   }
 
@@ -69,6 +75,11 @@ const NewSong: React.FC<Props> = (props) => {
                   name="play-circle"
                   className="w-5 h-5 cursor-pointer hover:text-primary mr-1"
                   onClick={() => playNewSong(item)}
+                />
+                <SvgIcon
+                  name="plus-circle"
+                  className="w-5 h-5 cursor-pointer hover:text-primary mr-1"
+                  onClick={() => addNewSong(item)}
                 />
                 <SvgIcon
                   name="star"

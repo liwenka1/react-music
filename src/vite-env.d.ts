@@ -24,6 +24,7 @@ declare module 'APlayer' {
     public init(): void
     public destroy(): void
     public setMode(mode: string): void
+    public play(): void
     public mode: string
     public list: {
       audios: audio[]

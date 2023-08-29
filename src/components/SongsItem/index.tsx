@@ -15,8 +15,14 @@ interface Props {
 const SongsItem: React.FC<Props> = (prpos) => {
   const { song, showArtist, showAlbum } = prpos
 
-  const { setAudio } = useAplayerStore()
+  const { ap, setAudio } = useAplayerStore()
   const playSong = async (song: Song | HotSong) => {
+    const audio = await setSong(song)
+    setAudio(audio)
+    ap?.list.switch(ap?.list.audios.length - 1)
+    ap?.play()
+  }
+  const addSong = async (song: Song | HotSong) => {
     const audio = await setSong(song)
     setAudio(audio)
   }
@@ -47,7 +53,11 @@ const SongsItem: React.FC<Props> = (prpos) => {
             className="svg-icon mr-1"
             onClick={() => playSong(song)}
           />
-          <SvgIcon name="plus-circle" className="svg-icon" />
+          <SvgIcon
+            name="plus-circle"
+            className="svg-icon"
+            onClick={() => addSong(song)}
+          />
         </div>
       </div>
       {showArtist && (
