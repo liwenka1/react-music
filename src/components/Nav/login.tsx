@@ -4,6 +4,9 @@ import { Input } from '../ui/input'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { Button } from '../ui/button'
 import { useEffect, useState } from 'react'
+import { useToast } from '@/components/ui/use-toast'
+import { useCaptchaSent, useCaptchaVerify } from '@/api/captcha'
+import { useLoginCellphone } from '@/api/login'
 
 interface Props {
   handleCloseModal: () => void
@@ -11,9 +14,21 @@ interface Props {
 
 const Login: React.FC<Props> = (props) => {
   const { handleCloseModal } = props
-
+  const { toast } = useToast()
   const [countdown, setCountdown] = useState(0)
-  const handleGetVerificationCode = () => {
+  const handleGetVerificationCode = async () => {
+    const sentResult = await useCaptchaSent(phone)
+    if (sentResult.data) {
+      toast({
+        title: '获取验证码',
+        description: '已发送验证码到手机请查收'
+      })
+    } else {
+      toast({
+        title: '获取验证码',
+        description: sentResult.message
+      })
+    }
     setCountdown(60)
   }
   useEffect(() => {
@@ -28,10 +43,23 @@ const Login: React.FC<Props> = (props) => {
     }
   }, [countdown])
 
-  const [username, setUsername] = useState('')
+  const [phone, setPhone] = useState('')
   const [verificationCode, setVerificationCode] = useState('')
-  const handleLogin = () => {
-    console.log(username, verificationCode)
+  const handleLogin = async () => {
+    const verifyResult = await useCaptchaVerify(phone, verificationCode)
+    if (verifyResult.data) {
+      toast({
+        title: '登录',
+        description: '验证码通过'
+      })
+      const loginResult = await useLoginCellphone(phone, verificationCode)
+      console.log(loginResult)
+    } else {
+      toast({
+        title: '登录',
+        description: '验证码错误'
+      })
+    }
   }
 
   return (
@@ -49,9 +77,9 @@ const Login: React.FC<Props> = (props) => {
               <div className="space-y-4">
                 <Label>手机号</Label>
                 <Input
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
               <div className="space-y-4 mt-4">
