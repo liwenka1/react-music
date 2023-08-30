@@ -238,3 +238,11 @@ export interface DjProgram {
   canDislike: boolean
   trackNumberUpdateTime?: unknown
 }
+
+export interface Personalizeds {
+  result: Personalized[]
+}
+
+export interface PersonalizedNewSongs {
+  result: PersonalizedNewSong[]
+}

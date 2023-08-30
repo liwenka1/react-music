@@ -5,3 +5,7 @@ export interface Banner {
   typeTitle: string
   bannerId: number
 }
+
+export interface BannerInfo {
+  banners: Banner[]
+}

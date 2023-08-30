@@ -4,15 +4,19 @@ import { useQuery } from 'react-query'
 
 const Tags: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0)
-  const { isLoading, error, data } = useQuery('useSearchHot', useSearchHot)
+  const {
+    isLoading,
+    error,
+    data: searchHot
+  } = useQuery('useSearchHot', useSearchHot)
 
   return (
     <>
       {isLoading && <div>Loading...</div>}
       {error && <div>Error occurred</div>}
       <div className="flex align-middle overflow-hidden whitespace-nowrap">
-        {data &&
-          data.hots.map((item, index) => {
+        {searchHot &&
+          searchHot.hots.map((item, index) => {
             return (
               <span
                 key={index}

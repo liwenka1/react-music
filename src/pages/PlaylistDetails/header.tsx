@@ -9,15 +9,15 @@ import LazyImg from 'react-lazyimg-component'
 
 interface Props {
   playListDetail: PlayListDetail
-  playListTrackAll: Song[]
+  songs: Song[]
 }
 
 const Header: React.FC<Props> = (props) => {
-  const { playListDetail, playListTrackAll } = props
+  const { playListDetail, songs } = props
   const { ap, setAudio } = useAplayerStore()
   const playPlaylist = async () => {
     ap?.list.clear()
-    for (const audio of playListTrackAll) {
+    for (const audio of songs) {
       setAudio(await setSong(audio))
     }
   }

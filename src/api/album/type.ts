@@ -1,4 +1,5 @@
 import type { Artist } from '../artist/type'
+import { Song } from '../song/type'
 
 export interface Album {
   songs: unknown[]
@@ -27,4 +28,15 @@ export interface Album {
   type: string
   size: number
   picId_str: string
+}
+
+export interface AlbumNewest {
+  albums: Album[]
+  code: number
+  total: number
+}
+
+export interface AlbumInfo {
+  album: Album
+  songs: Song[]
 }

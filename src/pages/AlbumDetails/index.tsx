@@ -7,9 +7,13 @@ import Loading from '@/components/Loading'
 
 const AlbumDetails: React.FC = () => {
   const location = useLocation()
-  const { data, isSuccess, isLoading, error } = useQuery(
-    ['album', location.state.albumId],
-    () => useAlbum(location.state.albumId)
+  const {
+    data: albumInfo,
+    isSuccess,
+    isLoading,
+    error
+  } = useQuery(['album', location.state.albumId], () =>
+    useAlbum(location.state.albumId)
   )
   if (isLoading) {
     return <Loading />
@@ -22,8 +26,8 @@ const AlbumDetails: React.FC = () => {
   if (isSuccess) {
     return (
       <div className="col-span-full flex flex-col">
-        <Header album={data.album} songs={data.songs} />
-        <Main album={data.album} songs={data.songs} />
+        <Header album={albumInfo.album} songs={albumInfo.songs} />
+        <Main album={albumInfo.album} songs={albumInfo.songs} />
       </div>
     )
   }

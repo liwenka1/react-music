@@ -1,9 +1,9 @@
 import http from '@/utils/request'
-import { Banner } from './type'
+import { BannerInfo } from './type'
 
 // banner
 export const useBanner = async () => {
-  const { banners } = await http.get<{ banners: Banner[] }>('/banner', {
+  const { banners } = await http.get<BannerInfo>('/banner', {
     type: 1
   })
   return banners

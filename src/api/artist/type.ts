@@ -1,3 +1,6 @@
+import { Album } from '../album/type'
+import { Song } from '../song/type'
+
 export interface Artist {
   albumSize: number
   alias: string[]
@@ -282,4 +285,21 @@ export interface M {
   size: number
   vd: number
   sr: number
+}
+
+export interface ArtistsInfo {
+  artist: Artist
+  hotSongs: HotSong[]
+}
+
+export interface ArtistSongs {
+  songs: Song[]
+}
+
+export interface ArtistAlbum {
+  hotAlbums: Album[]
+}
+
+export interface ArtistDetailData {
+  data: ArtistDetail
 }

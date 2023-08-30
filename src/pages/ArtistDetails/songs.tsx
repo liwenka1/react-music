@@ -18,7 +18,12 @@ const Songs: React.FC<Props> = (props) => {
   const [songs, setSongs] = useState([] as Song[])
   const limit = 20
   const [offset, setOffset] = useState(1)
-  const { data, isSuccess, isLoading, refetch } = useQuery(
+  const {
+    data: artistSongs,
+    isSuccess,
+    isLoading,
+    refetch
+  } = useQuery(
     ['artistSongs', location.state.artistId, offset],
     () =>
       useArtistSongs(
@@ -32,8 +37,8 @@ const Songs: React.FC<Props> = (props) => {
   const queryClient = useQueryClient()
   useEffect(() => {
     refetch().then(() => {
-      if (isSuccess && data) {
-        setSongs([...songs, ...data.songs])
+      if (isSuccess && artistSongs) {
+        setSongs([...songs, ...artistSongs.songs])
       } else {
         const cachedData = queryClient.getQueryData([
           'artistSongs',

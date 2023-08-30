@@ -2,17 +2,17 @@ import { Song } from '@/api/song/type'
 import SongsItem from '@/components/SongsItem'
 
 interface Props {
-  playListTrackAll: Song[]
+  songs: Song[]
 }
 
 const Main: React.FC<Props> = (props) => {
-  const { playListTrackAll } = props
+  const { songs } = props
 
   return (
     <div className="col-span-full">
       <div className="my-4">
         <span className="underline-text text-primary cursor-pointer">
-          歌曲{playListTrackAll.length}
+          歌曲{songs.length}
         </span>
       </div>
       <div>
@@ -22,7 +22,7 @@ const Main: React.FC<Props> = (props) => {
           <span className="col-span-3">专辑</span>
           <span className="col-span-1">时长</span>
         </div>
-        {playListTrackAll.map((song) => {
+        {songs.map((song) => {
           return (
             <SongsItem
               song={song}

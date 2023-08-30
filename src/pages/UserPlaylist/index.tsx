@@ -14,9 +14,13 @@ const UserPlaylist: React.FC = () => {
     navigate('/playlistDetails', { state: { playlistId } })
   }
   const limit = 35
-  const { data, isSuccess, isLoading, error } = useQuery(
-    ['userPlaylist', location.state.userId],
-    () => useUserPlaylist(location.state.userId, limit)
+  const {
+    data: playlist,
+    isSuccess,
+    isLoading,
+    error
+  } = useQuery(['userPlaylist', location.state.userId], () =>
+    useUserPlaylist(location.state.userId, limit)
   )
 
   if (isLoading) {
@@ -33,17 +37,17 @@ const UserPlaylist: React.FC = () => {
         <div className="col-span-full grid grid-cols-7 gap-4">
           <LazyImg
             className="w-full rounded-full col-span-1"
-            src={data.playlist[0].creator.avatarUrl}
-            alt={data.playlist[0].creator.nickname}
+            src={playlist[0].creator.avatarUrl}
+            alt={playlist[0].creator.nickname}
             placeholder={avatarLoadingImgUrl}
           />
           <div className="col-span-6 flex flex-col justify-between">
             <div>
               <h1 className="text-3xl font-bold my-2">
-                {data.playlist[0].creator.nickname}
+                {playlist[0].creator.nickname}
               </h1>
               <span className="text-xs font-light">
-                {data.playlist[0].creator.signature}
+                {playlist[0].creator.signature}
               </span>
             </div>
             <div className="flex mb-2">
@@ -61,7 +65,7 @@ const UserPlaylist: React.FC = () => {
             </span>
           </div>
           <div className="grid gap-4 grid-cols-6 mt-12">
-            {data.playlist.map((item) => {
+            {playlist.map((item) => {
               return (
                 <div
                   className="w-full h-auto cursor-pointer"

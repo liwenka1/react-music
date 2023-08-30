@@ -1,3 +1,5 @@
+import { Song } from '../song/type'
+
 export interface PlayListDetail {
   id: number
   name: string
@@ -216,4 +218,16 @@ export interface PlaylistHighqualityTag {
   type: number
   category: number
   hot: boolean
+}
+
+export interface PlayListTrackAll {
+  songs: Song[]
+}
+
+export interface PlayListDetails {
+  playlist: PlayListDetail[]
+}
+
+export interface PlayListDetailInfo {
+  playlist: PlayListDetail
 }

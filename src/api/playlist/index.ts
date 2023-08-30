@@ -1,6 +1,5 @@
 import http from '@/utils/request'
-import { Song } from '../song/type'
-import { PlayListDetail } from './type'
+import { PlayListDetailInfo, PlayListTrackAll } from './type'
 
 // 获取歌单所有歌曲
 export const usePlayListTrackAll = async (
@@ -8,7 +7,7 @@ export const usePlayListTrackAll = async (
   limit?: number,
   offset?: number
 ) => {
-  const { songs } = await http.get<{ songs: Song[] }>('/playlist/track/all', {
+  const { songs } = await http.get<PlayListTrackAll>('/playlist/track/all', {
     id: id,
     limit: limit,
     offset: offset
@@ -18,9 +17,9 @@ export const usePlayListTrackAll = async (
 
 // 获取歌单详情
 export const usePlayListDetail = async (id: number, s: number = 8) => {
-  const { playlist } = await http.get<{ playlist: PlayListDetail }>(
-    '/playlist/detail',
-    { id: id, s: s }
-  )
+  const { playlist } = await http.get<PlayListDetailInfo>('/playlist/detail', {
+    id: id,
+    s: s
+  })
   return playlist
 }

@@ -1,5 +1,5 @@
 import http from '@/utils/request'
-import { PlayListDetail } from '../playlist/type'
+import { PlayListDetails } from '../playlist/type'
 
 // 获取用户歌单
 export const useUserPlaylist = async (
@@ -7,9 +7,10 @@ export const useUserPlaylist = async (
   limit: number = 10,
   offset: number = 0
 ) => {
-  return await http.get<{ playlist: PlayListDetail[] }>('/user/playlist', {
+  const { playlist } = await http.get<PlayListDetails>('/user/playlist', {
     uid: uid,
     limit: limit,
     offset: offset
   })
+  return playlist
 }

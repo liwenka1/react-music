@@ -1,14 +1,15 @@
 import http from '@/utils/request'
-import { Artist, ArtistDesc, ArtistDetail, HotSong } from './type'
-import { Song } from '../song/type'
-import { Album } from '../album/type'
+import {
+  ArtistAlbum,
+  ArtistDesc,
+  ArtistDetailData,
+  ArtistSongs,
+  ArtistsInfo
+} from './type'
 
 // 获取歌手单曲
 export const useArtists = async (id: number) => {
-  const { artist, hotSongs } = await http.get<{
-    artist: Artist
-    hotSongs: HotSong[]
-  }>('/artists', {
+  const { artist, hotSongs } = await http.get<ArtistsInfo>('/artists', {
     id: id
   })
   return { artist, hotSongs }
@@ -16,7 +17,7 @@ export const useArtists = async (id: number) => {
 
 // 获取歌手详情
 export const useArtistDetail = async (id: number) => {
-  const { data } = await http.get<{ data: ArtistDetail }>('/artist/detail', {
+  const { data } = await http.get<ArtistDetailData>('/artist/detail', {
     id: id
   })
   return data
@@ -29,7 +30,7 @@ export const useArtistSongs = async (
   limit: number = 10,
   offset: number = 0
 ) => {
-  return await http.get<{ songs: Song[] }>('/artist/songs', {
+  return await http.get<ArtistSongs>('/artist/songs', {
     id: id,
     order: order,
     limit: limit,
@@ -43,7 +44,7 @@ export const useArtistAlbum = async (
   limit: number = 10,
   offset: number = 0
 ) => {
-  return await http.get<{ hotAlbums: Album[] }>('/artist/album', {
+  return await http.get<ArtistAlbum>('/artist/album', {
     id: id,
     limit: limit,
     offset: offset
@@ -52,5 +53,6 @@ export const useArtistAlbum = async (
 
 // 获取歌手描述
 export const useArtistDesc = async (id: number) => {
-  return await http.get<ArtistDesc>('/artist/desc', { id: id })
+  const data = await http.get<ArtistDesc>('/artist/desc', { id: id })
+  return data
 }

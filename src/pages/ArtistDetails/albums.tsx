@@ -15,7 +15,12 @@ const Albums: React.FC<Props> = (props) => {
   const [hotAlbums, setHotAlbums] = useState([] as Album[])
   const limit = 12
   const [offset, setOffset] = useState(1)
-  const { data, isSuccess, isLoading, refetch } = useQuery(
+  const {
+    data: artistAlbum,
+    isSuccess,
+    isLoading,
+    refetch
+  } = useQuery(
     ['artistAlbum', location.state.artistId, offset],
     () => useArtistAlbum(location.state.artistId, limit, (offset - 1) * limit),
     { staleTime: Infinity }
@@ -23,8 +28,8 @@ const Albums: React.FC<Props> = (props) => {
   const queryClient = useQueryClient()
   useEffect(() => {
     refetch().then(() => {
-      if (isSuccess && data) {
-        setHotAlbums([...hotAlbums, ...data.hotAlbums])
+      if (isSuccess && artistAlbum) {
+        setHotAlbums([...hotAlbums, ...artistAlbum.hotAlbums])
       } else {
         const cachedData = queryClient.getQueryData([
           'artistAlbum',
