@@ -7,9 +7,9 @@ export const useTopPlaylistHighquality = async (params?: {
   before?: number
   cat: string
 }) => {
-  const result = await http.get<TopPlaylistHighquality>(
+  const data = await http.get<TopPlaylistHighquality>(
     '/top/playlist/highquality',
     params
   )
-  return result
+  return data
 }

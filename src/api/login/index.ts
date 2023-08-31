@@ -10,14 +10,11 @@ import {
 
 // 手机登录
 export const useLoginCellphone = async (phone: string, captcha: string) => {
-  const { code, cookie, token } = await http.get<LoginCellphone>(
-    '/login/cellphone',
-    {
-      phone,
-      captcha
-    }
-  )
-  return { code, cookie, token }
+  const data = await http.get<LoginCellphone>('/login/cellphone', {
+    phone,
+    captcha
+  })
+  return data
 }
 
 // 二维码 key 生成接口
@@ -53,6 +50,6 @@ export const useLoginStatus = async (cookie: string) => {
 
 // 退出登录
 export const useLogout = async () => {
-  const code = await http.get<Logout>('/logout')
-  return code
+  const data = await http.get<Logout>('/logout')
+  return data
 }
