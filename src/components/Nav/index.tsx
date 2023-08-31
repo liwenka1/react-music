@@ -6,14 +6,6 @@ import { useNavigate } from 'react-router-dom'
 const Nav: React.FC = () => {
   const navigate = useNavigate()
 
-  const handleGoPrevious = () => {
-    navigate(-1)
-  }
-
-  const handleGoNext = () => {
-    navigate(1)
-  }
-
   return (
     <nav className="w-full pb-2 pt-2">
       <div className="flex justify-between items-center px-2 sm:px-6 py-1">
@@ -21,12 +13,12 @@ const Nav: React.FC = () => {
           <SvgIcon
             name="chevron-left"
             className="svg-icon mr-2"
-            onClick={handleGoPrevious}
+            onClick={() => navigate(-1)}
           />
           <SvgIcon
             name="chevron-right"
             className="svg-icon"
-            onClick={handleGoNext}
+            onClick={() => navigate(1)}
           />
         </div>
         <Search />
