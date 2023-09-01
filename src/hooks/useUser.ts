@@ -3,16 +3,6 @@ import { useLoginStatus, useLogout } from '@/api/login'
 import { UserProfile } from '@/api/login/type'
 
 export const useUser = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const handleLoginClick = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
-
   const [isLogin, setIsLogin] = useState(false)
   const [profile, setProfile] = useState({} as UserProfile)
   const loginStatus = async () => {
@@ -38,13 +28,10 @@ export const useUser = () => {
   }
 
   return {
-    isModalOpen,
     isLogin,
     setIsLogin,
     profile,
     setProfile,
-    handleLoginClick,
-    handleCloseModal,
     handleLogoutClick
   }
 }

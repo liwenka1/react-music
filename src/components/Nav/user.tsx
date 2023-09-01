@@ -11,18 +11,12 @@ import { ModeToggle } from '../mode-toggle'
 import Login from './login'
 import { Button } from '../ui/button'
 import { useUser } from '@/hooks/useUser'
+import { useLogin } from '@/hooks/useLogin'
 
 const User: React.FC = () => {
-  const {
-    isModalOpen,
-    isLogin,
-    setIsLogin,
-    profile,
-    setProfile,
-    handleLoginClick,
-    handleCloseModal,
-    handleLogoutClick
-  } = useUser()
+  const { isLogin, setIsLogin, profile, setProfile, handleLogoutClick } =
+    useUser()
+  const { isModalOpen, setIsModalOpen } = useLogin(setIsLogin, setProfile)
 
   return (
     <>
@@ -33,12 +27,20 @@ const User: React.FC = () => {
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <span
-              className="ml-4 cursor-pointer text-xs font-light"
-              onClick={handleLoginClick}
-            >
-              点我登录
-            </span>
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogTrigger
+                className="ml-4 cursor-pointer text-xs font-light"
+                onClick={() => setIsModalOpen(true)}
+              >
+                点我登录
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>登录</DialogTitle>
+                </DialogHeader>
+                <Login setIsLogin={setIsLogin} setProfile={setProfile} />
+              </DialogContent>
+            </Dialog>
           </div>
         )}
         {isLogin && (
@@ -67,13 +69,6 @@ const User: React.FC = () => {
         )}
         <ModeToggle />
       </div>
-      {isModalOpen && (
-        <Login
-          handleCloseModal={handleCloseModal}
-          setIsLogin={setIsLogin}
-          setProfile={setProfile}
-        />
-      )}
     </>
   )
 }

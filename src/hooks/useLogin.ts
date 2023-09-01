@@ -11,10 +11,10 @@ import { UserProfile } from '@/api/login/type'
 import { useToast } from '@/components/ui/use-toast'
 
 export const useLogin = (
-  handleCloseModal: () => void,
   setIsLogin: (isLogin: boolean) => void,
   setProfile: (profile: UserProfile) => void
 ) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { toast } = useToast()
   const [countdown, setCountdown] = useState(0)
   useEffect(() => {
@@ -49,18 +49,28 @@ export const useLogin = (
   const verifyLogin = async () => {
     const { data } = await useCaptchaVerify(phone, verificationCode)
     if (data) {
-      const { code, cookie } = await useLoginCellphone(phone, verificationCode)
-      if (code == 200) {
-        const { profile } = await useLoginStatus(cookie)
-        setIsLogin(true)
-        setProfile(profile)
-        localStorage.setItem('profile', JSON.stringify(profile))
-        localStorage.setItem('cookie', cookie)
+      try {
+        const { code, cookie } = await useLoginCellphone(
+          phone,
+          verificationCode
+        )
+        if (code == 200) {
+          const { profile } = await useLoginStatus(cookie)
+          setIsLogin(true)
+          setProfile(profile)
+          localStorage.setItem('profile', JSON.stringify(profile))
+          localStorage.setItem('cookie', cookie)
+          toast({
+            title: '登录',
+            description: '授权登录成功'
+          })
+          setIsModalOpen(false)
+        }
+      } catch {
         toast({
           title: '登录',
-          description: '授权登录成功'
+          description: '登录出错，请尝试二维码登录'
         })
-        handleCloseModal()
       }
     } else {
       toast({
@@ -85,7 +95,6 @@ export const useLogin = (
         clearInterval(timer)
       }
       if (code === 803) {
-        clearInterval(timer)
         const { profile } = await useLoginStatus(cookie)
         setIsLogin(true)
         setProfile(profile)
@@ -95,7 +104,12 @@ export const useLogin = (
           title: '登录',
           description: '授权登录成功'
         })
-        handleCloseModal()
+        setIsModalOpen(false)
+        clearInterval(timer)
+      }
+      console.log(isModalOpen)
+      if (!isModalOpen) {
+        clearInterval(timer)
       }
     }, 3000)
   }
@@ -105,9 +119,11 @@ export const useLogin = (
     phone,
     verificationCode,
     qrImg,
+    isModalOpen,
     handleGetVerificationCode,
     setPhone,
     setVerificationCode,
+    setIsModalOpen,
     verifyLogin,
     qrLogin
   }
