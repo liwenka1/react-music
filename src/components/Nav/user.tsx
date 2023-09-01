@@ -10,13 +10,24 @@ import {
 import { ModeToggle } from '../mode-toggle'
 import Login from './login'
 import { Button } from '../ui/button'
-import { useUser } from '@/hooks/useUser'
 import { useLogin } from '@/hooks/useLogin'
 
 const User: React.FC = () => {
-  const { isLogin, setIsLogin, profile, setProfile, handleLogoutClick } =
-    useUser()
-  const { isModalOpen, setIsModalOpen } = useLogin(setIsLogin, setProfile)
+  const {
+    isLogin,
+    profile,
+    handleLogoutClick,
+    countdown,
+    phone,
+    verificationCode,
+    qrImg,
+    isModalOpen,
+    handleGetVerificationCode,
+    setPhone,
+    setVerificationCode,
+    setIsModalOpen,
+    verifyLogin
+  } = useLogin()
 
   return (
     <>
@@ -38,7 +49,17 @@ const User: React.FC = () => {
                 <DialogHeader>
                   <DialogTitle>登录</DialogTitle>
                 </DialogHeader>
-                <Login setIsLogin={setIsLogin} setProfile={setProfile} />
+                <Login
+                  countdown={countdown}
+                  phone={phone}
+                  verificationCode={verificationCode}
+                  qrImg={qrImg}
+                  handleGetVerificationCode={handleGetVerificationCode}
+                  setPhone={setPhone}
+                  setVerificationCode={setVerificationCode}
+                  setIsModalOpen={setIsModalOpen}
+                  verifyLogin={verifyLogin}
+                />
               </DialogContent>
             </Dialog>
           </div>
@@ -56,12 +77,13 @@ const User: React.FC = () => {
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>退出登录</DialogTitle>
-                  <DialogDescription>确定要退出登录吗?</DialogDescription>
                 </DialogHeader>
+                <DialogDescription>确定要退出登录吗?</DialogDescription>
                 <DialogTrigger>
-                  <Button type="submit" onClick={handleLogoutClick}>
-                    确定
-                  </Button>
+                  <div className="grid grid-cols-2 gap-4 mt-4">
+                    <Button variant="secondary">取消</Button>
+                    <Button onClick={handleLogoutClick}>确定</Button>
+                  </div>
                 </DialogTrigger>
               </DialogContent>
             </Dialog>
