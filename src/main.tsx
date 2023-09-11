@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import 'virtual:svg-icons-register'
+import 'APlayer/dist/APlayer.min.css'
 import './index.css'
 
 const queryClient = new QueryClient()
