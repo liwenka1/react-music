@@ -1,4 +1,3 @@
-import 'APlayer/dist/APlayer.min.css'
 import { useEffect } from 'react'
 import useAplayerStore from '@/stores/aplayer'
 import './index.css'
