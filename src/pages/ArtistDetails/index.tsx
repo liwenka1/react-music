@@ -45,6 +45,8 @@ const ArtistDetails: React.FC = () => {
       </div>
     )
   }
+
+  return null
 }
 
 export default ArtistDetails

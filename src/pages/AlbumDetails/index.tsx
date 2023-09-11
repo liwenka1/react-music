@@ -31,6 +31,8 @@ const AlbumDetails: React.FC = () => {
       </div>
     )
   }
+
+  return null
 }
 
 export default AlbumDetails

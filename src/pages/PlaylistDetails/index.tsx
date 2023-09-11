@@ -37,6 +37,8 @@ const PlaylistDetails: React.FC = () => {
       </div>
     )
   }
+
+  return null
 }
 
 export default PlaylistDetails
